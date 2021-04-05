@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { appInterceptorProvider } from './app.interceptor';
 
 
 
@@ -11,6 +12,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule
+  ],
+  providers: [
+    appInterceptorProvider
   ],
   exports: [HeaderComponent, SidebarComponent]
 })

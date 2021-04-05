@@ -1,1 +1,30 @@
-<p>exam works!</p>
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="!isLoading" class="row">
+    <div class="col-2">
+        <h3>{{exam?.name}}</h3>
+        <p>EntryCode: {{exam?.entryCode}}</p>
+        <br>
+        <h6>Actions:</h6>
+    </div>
+    <div class="col-10">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Type</th>
+                <th scope="col">Questions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let question of exam?.questions" routerLink="/questions/{{question.id}}">
+                <td scope="row">{{question.id}}</td>
+                <td>{{question.title}}</td>
+                <td>{{question.type}}</td>
+                <td>{{question}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

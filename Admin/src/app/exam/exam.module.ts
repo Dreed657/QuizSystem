@@ -5,6 +5,7 @@ import { ExamRouterModule } from './exam-routing.module';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { ExamComponent } from './exam/exam.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,6 +13,7 @@ import { ExamComponent } from './exam/exam.component';
   declarations: [ListingComponent, CreateComponent, UpdateComponent, ExamComponent],
   imports: [
     CommonModule,
+    SharedModule,
     ExamRouterModule
   ]
 })
