@@ -6,7 +6,7 @@ import { UpdateComponent } from "./update/update.component";
 
 const routes: Routes = [
     {
-        path: 'exam',
+        path: 'exams',
         children: [
             {
                 path: '',
