@@ -17,10 +17,10 @@ namespace Server.Controllers
             this.examService = examService;
         }
 
-        [HttpPost("Join")]
-        public async Task<IActionResult> Join(string entryCode)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int Id)
         {
-            var result = await this.examService.GetByEntryCode(entryCode);
+            var result = await this.examService.GetById(Id);
 
             if (result == null)
             {
@@ -31,19 +31,11 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> index()
+        public async Task<IActionResult> GetAll()
         {
             var result = await this.examService.GetAll();
-
-            return Ok(result);
-        }
-
-        [HttpPost("AddQuestion")]
-        public async Task<IActionResult> AddQuestion(AddQuestionInputModel model)
-        {
-            var result = await this.examService.AddQuestion(model);
-
-            if (!result)
+            
+            if (result == null)
             {
                 return BadRequest(result);
             }
@@ -81,6 +73,32 @@ namespace Server.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var result = await this.examService.Delete(Id);
+
+            if (!result)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost("Join")]
+        public async Task<IActionResult> Join(string entryCode)
+        {
+            var result = await this.examService.GetByEntryCode(entryCode);
+
+            if (result == null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost("AddQuestion")]
+        public async Task<IActionResult> AddQuestion(AddQuestionInputModel model)
+        {
+            var result = await this.examService.AddQuestion(model);
 
             if (!result)
             {
