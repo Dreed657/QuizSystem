@@ -1,4 +1,4 @@
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader [isLoading]="isLoading"></app-loader>
 
 <div class="content" *ngIf="!isLoading">
   <div class="exam-nav">
@@ -25,7 +25,7 @@
                 class="nav-link text-warning"
                 [routerLink]="['/exams/update', exam?.id]"
                 title="Update"
-                ><i class="fas fa-pen fa-2x"></i
+                ><i class="fas fa-edit fa-2x"></i
               ></a>
             </li>
             <li class="nav-item">

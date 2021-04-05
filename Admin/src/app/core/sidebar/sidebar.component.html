@@ -5,16 +5,16 @@
 
   <ul class="list-unstyled components">
     <p>Dummy Heading</p>
-    <li class="active">
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
       <a [routerLink]="['/']">Home</a>
     </li>
-    <li>
+    <li [routerLinkActive]="['active']">
       <a [routerLink]="['/exams']">Exams</a>
     </li>
-    <li>
+    <li [routerLinkActive]="['active']">
       <a [routerLink]="['/questions']">Questions bank</a>
     </li>
-    <li>
+    <li [routerLinkActive]="['active']">
       <a
         href="#pageSubmenu"
         data-toggle="collapse"
@@ -34,8 +34,8 @@
         </li>
       </ul>
     </li>
-    <li>
-      <a href="#">Contact</a>
+    <li [routerLinkActive]="['active']">
+      <a [routerLink]="['/contacts']">Contact</a>
     </li>
   </ul>
 

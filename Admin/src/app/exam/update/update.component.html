@@ -1,4 +1,4 @@
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader [isLoading]="isLoading"></app-loader>
 
 <form
   *ngIf="!isLoading"
@@ -22,16 +22,15 @@
   />
   <input type="text" formControlName="id" class="form-control mb-4" hidden />
 
-  <button
-    class="btn btn-success"
-    color="info"
-    type="submit"
-    [disabled]="form.invalid"
-  >
-    Send
-  </button>
-
-  <div *ngIf="isSending" class="sending text-center mx-auto">
-    <app-loader></app-loader>
+  <div>
+    <button
+      class="btn btn-success"
+      color="info"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Send
+    </button>
+    <app-loader [isLoading]="isSending"></app-loader>
   </div>
 </form>

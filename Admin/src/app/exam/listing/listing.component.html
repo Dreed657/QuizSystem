@@ -31,7 +31,7 @@
   </nav>
 </div>
 
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader [isLoading]="isLoading"></app-loader>
 
 <table *ngIf="!isLoading" class="table table-hover">
   <thead>
@@ -53,7 +53,7 @@
             class="nav-link text-warning"
             [routerLink]="['/exams/update', exam.id]"
             title="Update"
-            ><i class="fas fa-plus-square fa-lg"></i
+            ><i class="fas fa-edit fa-lg"></i
           ></a>
         
           <!-- TEMP UNAVAILABLE -->
