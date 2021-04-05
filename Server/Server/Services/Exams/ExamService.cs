@@ -182,6 +182,7 @@ namespace Server.Services.Exams
             }
 
             this.db.Exams.Remove(entity);
+            await this.db.SaveChangesAsync();
 
             return true;
         }

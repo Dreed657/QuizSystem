@@ -33,9 +33,6 @@ namespace Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Exam>()
-                .HasKey(o => new {o.Id, o.EntryCode});
-
             base.OnModelCreating(modelBuilder);
         }
     }

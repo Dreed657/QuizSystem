@@ -20,18 +20,15 @@ namespace Server.Migrations
 
             modelBuilder.Entity("ExamQuestion", b =>
                 {
-                    b.Property<int>("QuestionsId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ExamsId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ExamsEntryCode")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("QuestionsId")
+                        .HasColumnType("int");
 
-                    b.HasKey("QuestionsId", "ExamsId", "ExamsEntryCode");
+                    b.HasKey("ExamsId", "QuestionsId");
 
-                    b.HasIndex("ExamsId", "ExamsEntryCode");
+                    b.HasIndex("QuestionsId");
 
                     b.ToTable("ExamQuestion");
                 });
@@ -59,10 +56,13 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Data.Models.Exam", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EntryCode")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsProtected")
                         .HasColumnType("bit");
@@ -71,10 +71,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id", "EntryCode");
+                    b.HasKey("Id");
 
                     b.ToTable("Exams");
                 });
@@ -100,15 +97,15 @@ namespace Server.Migrations
 
             modelBuilder.Entity("ExamQuestion", b =>
                 {
-                    b.HasOne("Server.Data.Models.Question", null)
+                    b.HasOne("Server.Data.Models.Exam", null)
                         .WithMany()
-                        .HasForeignKey("QuestionsId")
+                        .HasForeignKey("ExamsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Data.Models.Exam", null)
+                    b.HasOne("Server.Data.Models.Question", null)
                         .WithMany()
-                        .HasForeignKey("ExamsId", "ExamsEntryCode")
+                        .HasForeignKey("QuestionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

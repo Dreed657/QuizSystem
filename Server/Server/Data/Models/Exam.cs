@@ -11,6 +11,7 @@ namespace Server.Data.Models
             this.Questions = new HashSet<Question>();
         }
 
+        [Key]
         [Required]
         public int Id { get; set; }
 
@@ -21,8 +22,6 @@ namespace Server.Data.Models
         public string EntryCode { get; set; }
 
         public bool IsProtected { get; set; }
-
-        public string? Password { get; set; }
 
         public ICollection<Question> Questions { get; set; }
     }
