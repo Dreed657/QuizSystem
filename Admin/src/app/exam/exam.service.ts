@@ -13,7 +13,7 @@ export class ExamService {
 
   constructor(private http: HttpClient) { }
 
-  get(id: number): Observable<IExam> {
+  get(id: Number): Observable<IExam> {
     return this.http.get<IExam>(`/exams/${id}`);
   }
 
@@ -26,11 +26,11 @@ export class ExamService {
   }
 
   update(data: IUpdateExam): Observable<IExam> {
-    return this.http.post<IExam>('/exams', data);
+    return this.http.put<IExam>('/exams', data);
   }
   
-  delete(id: number): Observable<Boolean> {
-    return this.http.delete<Boolean>(`/exams/${id}`);
+  delete(id: Number): Observable<any> {
+    return this.http.delete(`/exams/${id}`);
   }
   
 }

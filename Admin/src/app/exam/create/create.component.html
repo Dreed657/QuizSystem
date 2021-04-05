@@ -1,1 +1,29 @@
-<p>create exams works!</p>
+<form
+  [formGroup]="form"
+  (ngSubmit)="submitHandle()"
+  class="text-center border border-light p-5"
+>
+  <p class="h4 mb-4">Create Exam</p>
+
+  <input
+    type="text"
+    formControlName="name"
+    class="form-control mb-4"
+    placeholder="Name"
+  />
+  <input
+    type="text"
+    formControlName="entryCode"
+    class="form-control mb-4"
+    placeholder="EntryCode"
+  />
+
+  <button
+    class="btn btn-primary"
+    color="info"
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    Send
+  </button>
+</form>

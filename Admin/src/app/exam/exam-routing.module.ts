@@ -14,7 +14,7 @@ const routes: Routes = [
                 component: ListingComponent
             },
             {
-                path: 'update',
+                path: 'update/:id',
                 pathMatch: 'full',
                 component: UpdateComponent
             },

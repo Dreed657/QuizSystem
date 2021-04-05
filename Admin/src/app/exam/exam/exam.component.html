@@ -1,30 +1,76 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
-<div *ngIf="!isLoading" class="row">
+<div class="content" *ngIf="!isLoading">
+  <div class="exam-nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <h3>Exam</h3>
+
+        <button
+          class="btn btn-danger d-inline-block d-lg-none ml-auto"
+          type="button"
+          data-toggle="collapse"
+          data-target="#examsNav"
+          aria-controls="examsNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-align-justify"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="examsNav">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link text-warning"
+                [routerLink]="['/exams/update', exam?.id]"
+                title="Update"
+                ><i class="fas fa-pen fa-2x"></i
+              ></a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-danger"
+                (click)="deleteHandler(exam?.id)"
+                title="Delete"
+                ><i class="fas fa-trash fa-2x"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row">
     <div class="col-2">
-        <h3>{{exam?.name}}</h3>
-        <p>EntryCode: {{exam?.entryCode}}</p>
-        <br>
-        <h6>Actions:</h6>
+      <h3>{{ exam?.name }}</h3>
+      <p>EntryCode: {{ exam?.entryCode }}</p>
+      <br />
+      <h6>Actions:</h6>
     </div>
     <div class="col-10">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Type</th>
-                <th scope="col">Questions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let question of exam?.questions" routerLink="/questions/{{question.id}}">
-                <td scope="row">{{question.id}}</td>
-                <td>{{question.title}}</td>
-                <td>{{question.type}}</td>
-                <td>{{question}}</td>
-              </tr>
-            </tbody>
-          </table>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Answers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let question of exam?.questions"
+            routerLink="/questions/{{ question.id }}"
+          >
+            <td scope="row">{{ question.id }}</td>
+            <td>{{ question.title }}</td>
+            <td>{{ question.type }}</td>
+            <td>{{ question.answers }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

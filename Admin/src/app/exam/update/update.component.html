@@ -1,1 +1,37 @@
-<p>update exam works!</p>
+<app-loader *ngIf="isLoading"></app-loader>
+
+<form
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="submitHandle()"
+  class="text-center border border-light p-5"
+>
+  <p class="h4 mb-4">Update Exam {{ exam?.name }}</p>
+
+  <input
+    type="text"
+    formControlName="name"
+    class="form-control mb-4"
+    placeholder="Name"
+  />
+  <input
+    type="text"
+    formControlName="entryCode"
+    class="form-control mb-4"
+    placeholder="EntryCode"
+  />
+  <input type="text" formControlName="id" class="form-control mb-4" hidden />
+
+  <button
+    class="btn btn-success"
+    color="info"
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    Send
+  </button>
+
+  <div *ngIf="isSending" class="sending text-center mx-auto">
+    <app-loader></app-loader>
+  </div>
+</form>

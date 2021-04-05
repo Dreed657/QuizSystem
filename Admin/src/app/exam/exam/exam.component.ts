@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IExam } from 'src/app/shared/Models/Exams/IExam';
 import { ExamService } from '../exam.service';
 
@@ -12,15 +12,29 @@ export class ExamComponent implements OnInit {
   exam: IExam | undefined;
   isLoading = false;
 
-  constructor(private exams: ExamService, private route: ActivatedRoute) {}
+  constructor(
+    private examService: ExamService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
     let id = this.route.snapshot.params.id;
 
-    this.exams.get(id).subscribe((x) => {
+    this.examService.get(id).subscribe((x) => {
       this.exam = x;
       this.isLoading = false;
+    });
+  }
+
+  deleteHandler(id: Number | undefined): void {
+    if (id === undefined) {
+      return;
+    }
+
+    this.examService.delete(id).subscribe(x => {
+      this.router.navigate(['/exams']);
     });
   }
 }
