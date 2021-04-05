@@ -9,6 +9,7 @@ namespace Server.Data.Models
         public Question()
         {
             this.Answers = new HashSet<Answer>();
+            this.Exams = new HashSet<Exam>();
         }
 
         [Key]
@@ -18,6 +19,9 @@ namespace Server.Data.Models
         public string Title { get; set; }
 
         public QuestionTypes Type { get; set; }
+
+        // AFTER EF CORE 5.0 auto creates mapping table
+        public ICollection<Exam> Exams { get; set; }
 
         public ICollection<Answer> Answers { get; set; }
     }
