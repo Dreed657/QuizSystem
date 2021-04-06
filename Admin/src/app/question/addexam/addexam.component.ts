@@ -10,28 +10,32 @@ import { QuestionService } from '../question.service';
 export class AddexamComponent implements OnInit {
   @Input() examId: Number | undefined;
   questions: IQuestion[] | undefined;
+  isLoading = false;
 
   selectedId: Number | undefined;
-  isLoading = false;
+  isSending = false;
 
   constructor(private questionService: QuestionService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
+
     this.questionService
       .getAllAddable(!this.examId ? 0 : this.examId)
       .subscribe((x) => {
         this.questions = x;
-
+        this.isLoading = false;
+        
         this.selectedId = x[0].id;
       });
   }
 
   addHandler(): void {
-    this.isLoading = true;
+    this.isSending = true;
 
     let data = { examId: this.examId, questionId: this.selectedId };
     this.questionService.addQuestionExam(data).subscribe((x) => {
-      this.isLoading = false;
+      this.isSending = false;
     });
   }
 
