@@ -1,12 +1,12 @@
 import { Routes, RouterModule } from "@angular/router";
 import { CreateComponent } from "./create/create.component";
-import { ExamComponent } from "./exam/exam.component";
 import { ListingComponent } from "./listing/listing.component";
+import { QuestionComponent } from "./question/question.component";
 import { UpdateComponent } from "./update/update.component";
 
 const routes: Routes = [
     {
-        path: 'exams',
+        path: 'questions',
         children: [
             {
                 path: '',
@@ -23,10 +23,10 @@ const routes: Routes = [
             },
             {
                 path: ':id',
-                component: ExamComponent
+                component: QuestionComponent
             }
         ]
     }
 ];
 
-export const ExamRouterModule = RouterModule.forChild(routes);
+export const QuestionRouterModule = RouterModule.forChild(routes);

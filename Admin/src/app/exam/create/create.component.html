@@ -22,8 +22,9 @@
     class="btn btn-primary"
     color="info"
     type="submit"
-    [disabled]="form.invalid"
+    [disabled]="form.invalid || isSending"
   >
     Send
   </button>
+  <app-loader [isLoading]="isSending"></app-loader>
 </form>

@@ -1,0 +1,46 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submitHandle()"
+  class="text-center border border-light p-5"
+>
+  <p class="h4 mb-4">Create Exam</p>
+
+  <div class="form-group">
+    <label for="Title">Title:</label>
+    <input
+      id="Title"
+      type="text"
+      formControlName="title"
+      class="form-control mb-4"
+      placeholder="Title"
+    />
+  </div>
+
+  <!-- TODO: Selected on options is bugged -->
+  <div class="form-group">
+    <label for="Type">Question type:</label>
+    <select
+      id="Type"
+      class="form-control form-control-lg"
+      formControlName="type"
+    >
+      <option value="MultiChoice" selected>MultiChoice</option>
+      <option value="MultiResponse">MultiResponse</option>
+      <option value="TrueFalse">TrueFalse</option>
+      <option value="ShortAnswer">ShortAnswer</option>
+      <option value="Numeric">Numeric</option>
+      <option value="FillBlank">FillBlank</option>
+    </select>
+  </div>
+  <input type="text" formControlName="id" class="form-control mb-4" hidden />
+
+  <button
+    class="btn btn-primary"
+    color="info"
+    type="submit"
+    [disabled]="form.invalid || isSending"
+  >
+    Send
+  </button>
+  <app-loader [isLoading]="isSending"></app-loader>
+</form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ExamService } from '../exam.service';
+import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'app-create',
@@ -13,13 +13,13 @@ export class CreateComponent implements OnInit {
   isSending = false;
 
   constructor(
-    private examService: ExamService,
+    private questionService: QuestionService,
     private fb: FormBuilder,
     private router: Router
   ) {
     this.form = this.fb.group({
-      name: ['', [Validators.required]],
-      entryCode: ['', [Validators.required]],
+      title: ['', [Validators.required]],
+      type: [0, [Validators.required]],
     });
   }
 
@@ -29,9 +29,9 @@ export class CreateComponent implements OnInit {
     const data = this.form.value;
     this.isSending = true;
 
-    this.examService.create(data).subscribe((x) => {
+    this.questionService.create(data).subscribe((x) => {
       this.isSending = false;
-      this.router.navigate([`exams/${x.id}`]);
+      this.router.navigate([`/questions/${x.id}`]);
     });
   }
 }

@@ -20,7 +20,7 @@ export class ExamComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    let id = this.route.snapshot.params.id;
+    const id = this.route.snapshot.params.id;
 
     this.examService.get(id).subscribe((x) => {
       this.exam = x;
