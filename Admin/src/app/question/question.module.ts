@@ -7,16 +7,18 @@ import { QuestionComponent } from './question/question.component';
 import { SharedModule } from '../shared/shared.module';
 import { QuestionRouterModule } from './question-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddexamComponent } from './addexam/addexam.component';
 
 
 
 @NgModule({
-  declarations: [CreateComponent, UpdateComponent, ListingComponent, QuestionComponent],
+  declarations: [CreateComponent, UpdateComponent, ListingComponent, QuestionComponent, AddexamComponent],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
     QuestionRouterModule
-  ]
+  ],
+  exports: [AddexamComponent]
 })
 export class QuestionModule { }

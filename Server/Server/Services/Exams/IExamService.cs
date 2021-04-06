@@ -14,6 +14,8 @@ namespace Server.Services.Exams
         Task<ExamViewModel> GetByEntryCode(string entryCode);
 
         Task<bool> AddQuestion(AddQuestionInputModel model);
+        
+        Task<bool> RemoveQuestion(RemoveQuestionInputModel model);
 
         Task<ExamViewModel> Create(CreateExamModel model);
 

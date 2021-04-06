@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { QuestionService } from 'src/app/question/question.service';
 import { IExam } from 'src/app/shared/Models/Exams/IExam';
 import { ExamService } from '../exam.service';
 
@@ -14,6 +15,7 @@ export class ExamComponent implements OnInit {
 
   constructor(
     private examService: ExamService,
+    private questionService: QuestionService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -33,8 +35,12 @@ export class ExamComponent implements OnInit {
       return;
     }
 
-    this.examService.delete(id).subscribe(x => {
+    this.examService.delete(id).subscribe((x) => {
       this.router.navigate(['/exams']);
     });
+  }
+
+  removeQuestionHandler(id: Number): void {
+    this.questionService.removeQuestionExam({examId: this.exam?.id, questionId: id}).subscribe();
   }
 }

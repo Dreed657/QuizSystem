@@ -11,6 +11,6 @@ namespace Server.Models.Exam
 
         public string EntryCode { get; set; }
 
-        public ICollection<QuestionViewModel> Questions { get; set; }
+        public ICollection<ShortQuestionModel> Questions { get; set; }
     }
 }

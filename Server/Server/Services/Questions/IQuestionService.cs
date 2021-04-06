@@ -10,10 +10,10 @@ namespace Server.Services.Questions
         Task<QuestionViewModel> GetById(int id);
 
         Task<IEnumerable<QuestionViewModel>> GetAll();
+        
+        Task<IEnumerable<QuestionViewModel>> GetAllAddable(int examId);
 
         Task<IEnumerable<QuestionViewModel>> GetAllForExam(int examId);
-
-        Task<bool> AddAnswer(AddAnswerToQuestion model);
 
         Task<QuestionViewModel> Create(CreateQuestionModel model);
 

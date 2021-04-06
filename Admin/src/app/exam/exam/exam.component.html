@@ -50,13 +50,14 @@
       <h6>Actions:</h6>
     </div>
     <div class="col-10">
-      <table class="table table-hover">
+      <table *ngIf="exam?.questions?.length != 0" class="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Type</th>
             <th scope="col">Answers</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -68,9 +69,20 @@
             <td>{{ question.title }}</td>
             <td>{{ question.type }}</td>
             <td>{{ question.answers }}</td>
+            <td>
+              <button class="btn btn-warning p-0" (click)="removeQuestionHandler(question.id)">
+                <a class="nav-link text-danger" title="Delete"
+                  ><i class="fas fa-trash fa-lg"></i
+                ></a>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+      <p *ngIf="exam?.questions?.length == 0" class="text-center text-danger">
+        No questions in the exam!
+      </p>
+      <app-addexam [examId]="exam?.id"></app-addexam>
     </div>
   </div>
 </div>

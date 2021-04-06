@@ -33,6 +33,19 @@ namespace Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("addable/{examId}")]
+        public async Task<IActionResult> GetAllAddable(int examId)
+        {
+            var result = await this.questionService.GetAllAddable(examId);
+
+            if (result == null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById(int Id)
         {
@@ -65,19 +78,6 @@ namespace Server.Controllers
             var result = await this.answerService.GetByQuestionId(questionId);
 
             if (result == null)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
-        }
-
-        [HttpPost("AddAnswer")]
-        public async Task<IActionResult> AddAnswer(AddAnswerToQuestion model)
-        {
-            var result = await this.questionService.AddAnswer(model);
-
-            if (!result)
             {
                 return BadRequest(result);
             }

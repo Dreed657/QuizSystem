@@ -7,6 +7,7 @@ import { UpdateComponent } from './update/update.component';
 import { ExamComponent } from './exam/exam.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuestionModule } from '../question/question.module';
 
 
 
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    QuestionModule,
     ExamRouterModule
   ]
 })

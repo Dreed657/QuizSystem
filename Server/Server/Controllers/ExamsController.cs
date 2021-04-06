@@ -107,5 +107,18 @@ namespace Server.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut("RemoveQuestion")]
+        public async Task<IActionResult> RemoveQuestion(RemoveQuestionInputModel model)
+        {
+            var result = await this.examService.RemoveQuestion(model);
+
+            if (!result)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
     }
 }

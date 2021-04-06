@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { IQuestionExam } from '../shared/Models/Common/AddQuestionExam';
 import { ICreateQuestion } from '../shared/Models/Questions/ICreateQuestion';
 import { IQuestion } from '../shared/Models/Questions/IQuestion';
 import { IUpdateQuestion } from '../shared/Models/Questions/IUpdateQuestion';
@@ -19,6 +20,18 @@ export class QuestionService {
     return this.http.get<IQuestion>(`/questions/${id}`);
   }
 
+  getAllAddable(examId: Number): Observable<IQuestion[]> {
+    return this.http.get<IQuestion[]>(`/questions/addable/${examId}`);
+  }
+
+  addQuestionExam(data: IQuestionExam):  Observable<any> {
+    return this.http.post('/exams/AddQuestion', data);
+  }
+
+  removeQuestionExam(data: IQuestionExam):  Observable<any> {
+    return this.http.put('/Exams/RemoveQuestion', data);
+  }
+
   create(data: ICreateQuestion): Observable<IQuestion> {
     console.log("Data: ", data);
 
@@ -30,6 +43,6 @@ export class QuestionService {
   }
 
   delete(id: Number): Observable<any> {
-    return this.http.delete(`/questions/${id}`);
+    return this.http.delete(`/questions?id=${id}`);
   }
 }

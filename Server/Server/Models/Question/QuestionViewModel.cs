@@ -10,7 +10,7 @@ namespace Server.Models.Question
 
         public string Title { get; set; }
 
-        public QuestionTypes Type { get; set; }
+        public string Type { get; set; }
 
         public ICollection<AnswerViewModel> Answers { get; set; }
     }
