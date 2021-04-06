@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models.Common;
 using Server.Models.Question;
@@ -18,8 +20,21 @@ namespace Server.Controllers
             this.answerService = answerService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await this.questionService.GetAll();
+
+            if (result == null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpGet("{Id}")]
-        public async Task<IActionResult> Index(int Id)
+        public async Task<IActionResult> GetById(int Id)
         {
             var result = await this.questionService.GetById(Id);
 
@@ -73,6 +88,11 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateQuestionModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this.questionService.Create(model);
 
             if (result == null)

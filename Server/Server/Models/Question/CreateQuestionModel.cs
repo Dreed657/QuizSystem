@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 using Server.Data.Models.Enums;
 
 namespace Server.Models.Question
@@ -10,6 +8,7 @@ namespace Server.Models.Question
     {
         public string Title { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public QuestionTypes Type { get; set; }
     }
 }

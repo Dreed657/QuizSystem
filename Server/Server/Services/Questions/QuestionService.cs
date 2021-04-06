@@ -35,6 +35,22 @@ namespace Server.Services.Questions
             .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<QuestionViewModel>> GetAll()
+        {
+            return await this.db.Questions.Select(x => new QuestionViewModel()
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Type = x.Type,
+                Answers = x.Answers.Select(a => new AnswerViewModel()
+                {
+                    Id = a.Id,
+                    Content = a.Content,
+                    QuestionId = a.QuestionId
+                }).ToList()
+            }).ToListAsync();
+        }
+
         // REFACTOR 
         public async Task<IEnumerable<QuestionViewModel>> GetAllForExam(int examId)
         {
