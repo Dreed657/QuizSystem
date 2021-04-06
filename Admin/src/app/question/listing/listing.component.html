@@ -68,6 +68,6 @@
     </tr>
   </tbody>
 </table>
-<p *ngIf="!!questions" class="text-center text-danger">
+<p *ngIf="questions?.length == 0" class="text-center text-danger">
   No questions in the bank!
 </p>
