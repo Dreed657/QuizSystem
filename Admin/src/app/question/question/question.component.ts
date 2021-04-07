@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnswerService } from 'src/app/answer/answer.service';
 import { IQuestion } from 'src/app/shared/Models/Questions/IQuestion';
 import { QuestionService } from '../question.service';
 
@@ -14,11 +15,16 @@ export class QuestionComponent implements OnInit {
 
   constructor(
     private questionServices: QuestionService,
+    private answerService: AnswerService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.updateHandler();
+  }
+
+  updateHandler(): void {
     this.isLoading = true;
     const id = this.route.snapshot.params.id;
 
@@ -28,13 +34,23 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  deleteHandler(id: Number | undefined): void {
+  deleteQuestionHandler(id: Number | undefined): void {
     if (id === undefined) {
       return;
     }
 
-    this.questionServices.delete(id).subscribe(x => {
+    this.questionServices.delete(id).subscribe((x) => {
       this.router.navigate(['/questions']);
+    });
+  }
+
+  deleteAnswerHandler(id: Number | undefined): void {
+    if (id === undefined) {
+      return;
+    }
+
+    this.answerService.delete(id).subscribe((x) => {
+      this.router.navigate([`/questions/${this.question?.id}`]);
     });
   }
 }

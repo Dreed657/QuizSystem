@@ -36,6 +36,7 @@ namespace Server.Services.Exams
         {
             var entity = await this.db.Exams
                 .Include(x => x.Questions)
+                .ThenInclude(x => x.Answers)
                 .FirstOrDefaultAsync(x => x.Id == id);
             
             return new ExamViewModel()

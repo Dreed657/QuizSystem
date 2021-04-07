@@ -1,5 +1,4 @@
 <app-loader [isLoading]="isLoading"></app-loader>
-
 <div class="content" *ngIf="!isLoading">
   <div class="questions-nav">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,6 +21,14 @@
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
               <a
+                class="nav-link text-primary"
+                (click)="updateHandler()"
+                title="Update"
+                ><i class="fas fa-sync fa-2x"></i
+              ></a>
+            </li>
+            <li class="nav-item">
+              <a
                 class="nav-link text-warning"
                 [routerLink]="['/questions/update', question?.id]"
                 title="Update"
@@ -31,7 +38,7 @@
             <li class="nav-item">
               <a
                 class="nav-link text-danger"
-                (click)="deleteHandler(question?.id)"
+                (click)="deleteQuestionHandler(question?.id)"
                 title="Delete"
                 ><i class="fas fa-trash fa-2x"></i
               ></a>
@@ -60,8 +67,22 @@
       >
         <td scope="row">{{ answer.id }}</td>
         <td>{{ answer.content }}</td>
-        <td></td>
+        <td>
+          <a
+            class="mx-2 text-danger"
+            (click)="deleteAnswerHandler(answer?.id)"
+            title="Delete"
+            ><i class="fas fa-trash fa-2x"></i
+          ></a>
+        </td>
       </tr>
     </tbody>
   </table>
+  <p *ngIf="question?.answers?.length == 0" class="text-center text-danger">
+    No answers for this question!
+  </p>
+  <app-answer-create
+    [questionId]="question?.id"
+    (isUpdatable)="updateHandler()"
+  ></app-answer-create>
 </div>

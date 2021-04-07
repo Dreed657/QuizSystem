@@ -16,6 +16,7 @@ import { AnswerRouterModule } from './answer-routing.module';
     SharedModule,
     ReactiveFormsModule,
     AnswerRouterModule
-  ]
+  ],
+  exports: [CreateComponent]
 })
 export class AnswerModule { }
