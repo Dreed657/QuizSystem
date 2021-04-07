@@ -9,6 +9,7 @@ import { ExamModule } from './exam/exam.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { QuestionModule } from './question/question.module';
+import { AnswerModule } from './answer/answer.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { QuestionModule } from './question/question.module';
     CoreModule,
     SharedModule,
     ExamModule,
-    QuestionModule
+    QuestionModule,
+    AnswerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
