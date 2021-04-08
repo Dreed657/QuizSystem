@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Server.Data;
 using Server.Data.Models;
+using Server.Data.Seeding;
 using Server.Infrastructure.Helpers;
 using Server.Services.Answers;
 using Server.Services.Exams;
@@ -102,6 +103,13 @@ namespace Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var db = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                db.Database.Migrate();
+                new ApplicationDbContextSeeder().SeedAsync(db, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
