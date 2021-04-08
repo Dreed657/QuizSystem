@@ -1,7 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Server.Models.Common;
 using Server.Models.Exam;
 using Server.Services.Exams;

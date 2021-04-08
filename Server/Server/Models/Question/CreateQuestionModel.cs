@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json.Converters;
 using Server.Data.Models.Enums;
 
 namespace Server.Models.Question
