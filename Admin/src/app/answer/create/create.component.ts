@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ICreateAnswer } from 'src/app/shared/Models/Answers/ICreateAnswer';
 import { AnswerService } from '../answer.service';
 
 @Component({
@@ -8,14 +9,17 @@ import { AnswerService } from '../answer.service';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
-  @Input() questionId: Number | undefined;
-  @Output() isUpdatable: EventEmitter<any> = new EventEmitter();
+  @Input() questionId: Number;
+  @Output() isUpdated: EventEmitter<any> = new EventEmitter();
 
   form: FormGroup;
   isSending = false;
 
   constructor(private answerService: AnswerService, private fb: FormBuilder) {
+    this.questionId = 0;
+
     this.form = this.fb.group({
+      isCorrect: [false],
       content: ['', [Validators.required]],
     });
   }
@@ -25,9 +29,15 @@ export class CreateComponent implements OnInit {
   addHandler(): void {
     this.isSending = true;
 
-    this.isUpdatable.emit();
+    this.isUpdated.emit();
 
-    this.answerService.create({ content: this.form.value.content, questionId: this.questionId ? this.questionId : 0 }).subscribe((x) => {
+    let data: ICreateAnswer = {
+      content: this.form.value.content,
+      questionId: this.questionId,
+      isCorrect: this.form.value.isCorrect,
+    };
+
+    this.answerService.create(data).subscribe((x) => {
       this.isSending = false;
     });
   }

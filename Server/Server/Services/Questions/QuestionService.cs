@@ -29,6 +29,7 @@ namespace Server.Services.Questions
                 {
                     Id = a.Id,
                     Content = a.Content,
+                    IsCorrect = a.IsCorrect,
                     QuestionId = a.QuestionId
                 }).ToList()
             })

@@ -7,9 +7,10 @@
       <h6 class="card-subtitle mb-2 text-muted">
         QuestionId: {{ answer?.questionId }}
       </h6>
-      <p class="card-text">
-        {{ answer?.content }}
-      </p>
+      <div class="card-text">
+        <p>Content: {{ answer?.content }}</p>
+        <p>IsCorrect: {{ answer?.isCorrect }}</p>
+      </div>
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
     </div>

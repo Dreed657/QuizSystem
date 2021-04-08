@@ -57,6 +57,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Content</th>
+        <th scope="col">IsCorrect?</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -67,6 +68,7 @@
       >
         <td scope="row">{{ answer.id }}</td>
         <td>{{ answer.content }}</td>
+        <td>{{ answer.isCorrect }}</td>
         <td>
           <a
             class="mx-2 text-danger"
@@ -82,7 +84,7 @@
     No answers for this question!
   </p>
   <app-answer-create
-    [questionId]="question?.id"
-    (isUpdatable)="updateHandler()"
+    [questionId]="!question ? 0 : question.id"
+    (isUpdated)="updateHandler()"
   ></app-answer-create>
 </div>

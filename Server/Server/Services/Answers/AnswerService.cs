@@ -25,6 +25,7 @@ namespace Server.Services.Answers
             {
                 Id = entity.Id,
                 Content = entity.Content,
+                IsCorrect = entity.IsCorrect,
                 QuestionId = entity.QuestionId
             };
         }
@@ -39,6 +40,7 @@ namespace Server.Services.Answers
             {
                 Id = x.Id,
                 Content = x.Content,
+                IsCorrect = x.IsCorrect,
                 QuestionId = x.QuestionId
             }).ToList();
         }
@@ -48,6 +50,7 @@ namespace Server.Services.Answers
             var answer = new Answer()
             {
                 Content = model.Content,
+                IsCorrect = model.IsCorrect,
                 QuestionId = model.QuestionId
             };
 
@@ -58,6 +61,7 @@ namespace Server.Services.Answers
             {
                 Id = answer.Id,
                 Content = answer.Content,
+                IsCorrect = answer.IsCorrect,
                 QuestionId = answer.QuestionId
             };
         }
@@ -72,11 +76,15 @@ namespace Server.Services.Answers
             }
 
             entity.Content = model.Content;
+            entity.IsCorrect = model.IsCorrect;
+
+            await this.db.SaveChangesAsync();
 
             return new AnswerViewModel()
             {
                 Id = entity.Id,
                 Content = entity.Content,
+                IsCorrect = entity.IsCorrect,
                 QuestionId = entity.QuestionId
             };
         }
