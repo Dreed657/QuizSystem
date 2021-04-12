@@ -12,10 +12,10 @@ namespace Server.Data.Seeding
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
             if (!dbContext.Users.Any())
             {
+                var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                
                 await SeedAdminAsync(dbContext, userManager);
             }
         }
