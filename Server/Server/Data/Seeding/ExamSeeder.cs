@@ -22,7 +22,13 @@ namespace Server.Data.Seeding
                     EntryCode = "test",
                 };
 
-                exam.Questions = questions;
+                foreach (var question in questions)
+                {
+                    exam.Questions.Add(new ExamQuestion()
+                    {
+                        Question = question
+                    });   
+                }
 
                 await dbContext.Exams.AddAsync(exam);
                 await dbContext.SaveChangesAsync();

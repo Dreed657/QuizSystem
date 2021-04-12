@@ -55,7 +55,7 @@ namespace Server.Services.Questions
         public async Task<IEnumerable<QuestionViewModel>> GetAllAddable(int examId)
         {
             return await this.db.Questions
-                .Where(x => x.Exams.All(y => y.Id != examId))
+                .Where(x => x.Exams.All(y => y.Question.Id != examId))
                 .Select(x => new QuestionViewModel()
                 {
                     Id = x.Id,
@@ -79,10 +79,10 @@ namespace Server.Services.Questions
 
             return exam?.Questions.Select(x => new QuestionViewModel()
             {
-                Id = x.Id,
-                Title = x.Title,
-                Type = x.Type.ToString(),
-                Answers = x.Answers.Select(a => new AnswerViewModel()
+                Id = x.Question.Id,
+                Title = x.Question.Title,
+                Type = x.Question.Type.ToString(),
+                Answers = x.Question.Answers.Select(a => new AnswerViewModel()
                 {
                     Id = a.Id,
                     Content = a.Content,

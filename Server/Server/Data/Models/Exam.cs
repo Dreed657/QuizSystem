@@ -8,7 +8,8 @@ namespace Server.Data.Models
     {
         public Exam()
         {
-            this.Questions = new HashSet<Question>();
+            this.Questions = new HashSet<ExamQuestion>();
+            this.Participants = new HashSet<UserExam>();
         }
 
         [Key]
@@ -21,8 +22,8 @@ namespace Server.Data.Models
         [Required]
         public string EntryCode { get; set; }
 
-        public bool IsProtected { get; set; }
+        public virtual ICollection<ExamQuestion> Questions { get; set; }
 
-        public ICollection<Question> Questions { get; set; }
+        public virtual ICollection<UserExam> Participants { get; set; }
     }
 }

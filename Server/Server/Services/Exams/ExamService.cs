@@ -36,9 +36,9 @@ namespace Server.Services.Exams
         {
             var entity = await this.db.Exams
                 .Include(x => x.Questions)
-                .ThenInclude(x => x.Answers)
+                .ThenInclude(x => x.Question.Answers)
                 .FirstOrDefaultAsync(x => x.Id == id);
-            
+
             return new ExamViewModel()
             {
                 Id = entity.Id,
@@ -46,10 +46,10 @@ namespace Server.Services.Exams
                 EntryCode = entity.EntryCode,
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Type = x.Type.ToString(),
-                    Answers = x.Answers.Count()
+                    Id = x.Question.Id,
+                    Title = x.Question.Title,
+                    Type = x.Question.Type.ToString(),
+                    Answers = x.Question.Answers.Count()
                 }).ToList()
             };
         }
@@ -70,10 +70,10 @@ namespace Server.Services.Exams
                 EntryCode = exam.EntryCode,
                 Questions = exam.Questions.Select(x => new ShortQuestionModel()
                 {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Type = x.Type.ToString(),
-                    Answers = x.Answers.Count()
+                    Id = x.Question.Id,
+                    Title = x.Question.Title,
+                    Type = x.Question.Type.ToString(),
+                    Answers = x.Question.Answers.Count()
                 }).ToList()
             };
         }
@@ -93,7 +93,10 @@ namespace Server.Services.Exams
                 return false;
             }
 
-            exam.Questions.Add(question);
+            exam.Questions.Add(new ExamQuestion()
+            {
+                Question = question
+            });
             await this.db.SaveChangesAsync();
 
             return true;
@@ -102,25 +105,16 @@ namespace Server.Services.Exams
         // TODO: Replace include with better solution
         public async Task<bool> RemoveQuestion(RemoveQuestionInputModel model)
         {
-            var exam = await this.db.Exams
-                .Include(x => x.Questions)
-                .FirstOrDefaultAsync(x => x.Id == model.ExamId);
-            var question = await this.db.Questions
-                .Include(x => x.Exams)
-                .FirstOrDefaultAsync(x => x.Id == model.QuestionId);
+            var examQuestion = await
+                this.db.ExamQuestion.FirstOrDefaultAsync(x =>
+                    x.ExamId == model.ExamId && x.QuestionId == model.QuestionId);
 
-            if (exam == null)
+            if (examQuestion == null)
             {
                 return false;
             }
 
-            if (question == null)
-            {
-                return false;
-            }
-
-            exam.Questions.Remove(question);
-            question.Exams.Remove(exam);
+            this.db.ExamQuestion.Remove(examQuestion);
             await this.db.SaveChangesAsync();
 
             return true;
@@ -145,10 +139,10 @@ namespace Server.Services.Exams
                 EntryCode = entity.EntryCode,
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Type = x.Type.ToString(),
-                    Answers = x.Answers.Count(),
+                    Id = x.Question.Id,
+                    Title = x.Question.Title,
+                    Type = x.Question.Type.ToString(),
+                    Answers = x.Question.Answers.Count(),
                 }).ToList()
             };
         }
@@ -174,10 +168,10 @@ namespace Server.Services.Exams
                 EntryCode = entity.EntryCode,
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Type = x.Type.ToString(),
-                    Answers = x.Answers.Count()
+                    Id = x.Question.Id,
+                    Title = x.Question.Title,
+                    Type = x.Question.Type.ToString(),
+                    Answers = x.Question.Answers.Count()
                 }).ToList()
             };
         }

@@ -21,7 +21,8 @@ namespace Server.Data.Seeding
 
             var seeders = new List<ISeeder>()
             {
-                new AdminSeeder()
+                new AdminSeeder(),
+                new ExamSeeder()
             };
 
             foreach (var seeder in seeders)
