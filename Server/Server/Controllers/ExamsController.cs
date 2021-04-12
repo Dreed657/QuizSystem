@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Models.Common;
 using Server.Models.Exam;
+using Server.Services.Common;
 using Server.Services.Exams;
 
 namespace Server.Controllers
@@ -9,10 +10,12 @@ namespace Server.Controllers
     public class ExamsController : ApiController
     {
         private readonly IExamService examService;
+        private readonly ICurrentUserService user;
 
-        public ExamsController(IExamService examService)
+        public ExamsController(IExamService examService, ICurrentUserService user)
         {
             this.examService = examService;
+            this.user = user;
         }
 
         [HttpGet("{id}")]
@@ -81,9 +84,10 @@ namespace Server.Controllers
         }
 
         [HttpPost("Join")]
-        public async Task<IActionResult> Join(string entryCode)
+        public async Task<IActionResult> Join(int examId)
         {
-            var result = await this.examService.GetByEntryCode(entryCode);
+            var userId = this.user.GetId();
+            var result = await this.examService.Join(userId, examId);
 
             if (result == null)
             {
@@ -117,6 +121,14 @@ namespace Server.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPost(nameof(Finish))]
+        public async Task<IActionResult> Finish(int examId)
+        {
+            var userId = this.user.GetId();
+
+            return Ok();
         }
     }
 }

@@ -54,30 +54,6 @@ namespace Server.Services.Exams
             };
         }
 
-        public async Task<ExamViewModel> GetByEntryCode(string entryCode)
-        {
-            var exam = await this.db.Exams.FirstOrDefaultAsync(x => x.EntryCode == entryCode);
-
-            if (exam == null)
-            {
-                return null;
-            }
-
-            return new ExamViewModel()
-            {
-                Id = exam.Id,
-                Name = exam.Name,
-                EntryCode = exam.EntryCode,
-                Questions = exam.Questions.Select(x => new ShortQuestionModel()
-                {
-                    Id = x.Question.Id,
-                    Title = x.Question.Title,
-                    Type = x.Question.Type.ToString(),
-                    Answers = x.Question.Answers.Count()
-                }).ToList()
-            };
-        }
-
         public async Task<bool> AddQuestion(AddQuestionInputModel model)
         {
             var exam = await this.db.Exams.FirstOrDefaultAsync(x => x.Id == model.ExamId);
@@ -189,6 +165,49 @@ namespace Server.Services.Exams
             await this.db.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> Join(string userId, int examId)
+        {
+            var exam = await this.db.Exams.FirstOrDefaultAsync(x => x.Id == examId);
+
+            if (exam == null)
+            {
+                return false;
+            }
+
+            var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            exam.Participants.Add(new UserExam()
+            {
+                Exam = exam,
+                User = user
+            });
+            await this.db.SaveChangesAsync();
+
+            return true;
+        }
+
+        // TODO: LOOK UP THIS
+        public async Task Finish(string userId, int examId)
+        {
+            var entity = await this.db.ExamParticipants.FirstOrDefaultAsync(x => x.ExamId == examId && x.UserId == userId);
+            var results = await this.db.UserAnswer.Where(x => x.UserId == userId && x.ExamId == examId).ToListAsync();
+
+            var correct = results.Count(x => x.Answer.IsCorrect);
+            var wrong = results.Count - correct;
+            var score = results.Select(x => x.Answer.Difficulty).Cast<int>().Sum();
+
+            entity.Score = score;
+            entity.CorrectAnswers = correct;
+            entity.WrongAnswers = wrong;
+
+            await this.db.SaveChangesAsync();
         }
     }
 }

@@ -39,17 +39,17 @@ namespace Server.Data.Seeding
         {
             var questions = new List<Question>();
             var random = new Random();
-            var values = Enum.GetValues(typeof(QuestionTypes));
+            var types = Enum.GetValues(typeof(QuestionTypes));
 
             for (int i = 0; i < count; i++)
             {
                 var question = new Question()
                 {
                     Title = $"Test question {i}",
-                    Type = (QuestionTypes)values.GetValue(random.Next(values.Length)),
+                    Type = (QuestionTypes)types.GetValue(random.Next(types.Length)),
                 };
                 
-                question.Answers = CreateAnswers(random.Next(0, count));
+                question.Answers = CreateAnswers(random.Next(2, 5));
                 questions.Add(question);
             }
             
@@ -63,13 +63,15 @@ namespace Server.Data.Seeding
         {
             var answers = new List<Answer>();
             var random = new Random();
+            var difficulties = Enum.GetValues(typeof(AnswerDifficulty));
 
             for (int i = 0; i < count; i++)
             {
                 var answer = new Answer()
                 {
                     Content = $"Random answer test {i}",
-                    IsCorrect = random.Next(0, 1) < 0.5,
+                    IsCorrect = random.Next(0, 10) < 5,
+                    Difficulty = (AnswerDifficulty)difficulties.GetValue(random.Next(difficulties.Length)),
                 };
 
                 answers.Add(answer);

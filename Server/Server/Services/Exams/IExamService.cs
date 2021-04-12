@@ -11,8 +11,6 @@ namespace Server.Services.Exams
 
         Task<ExamViewModel> GetById(int id);
 
-        Task<ExamViewModel> GetByEntryCode(string entryCode);
-
         Task<bool> AddQuestion(AddQuestionInputModel model);
         
         Task<bool> RemoveQuestion(RemoveQuestionInputModel model);
@@ -22,5 +20,9 @@ namespace Server.Services.Exams
         Task<ExamViewModel> Update(UpdateExamModel model);
 
         Task<bool> Delete(int examId);
+        
+        Task<bool> Join(string userId, int examId);
+
+        Task Finish(string userId, int examId);
     }
 }
