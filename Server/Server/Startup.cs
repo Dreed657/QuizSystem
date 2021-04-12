@@ -17,6 +17,7 @@ using Server.Data.Models;
 using Server.Data.Seeding;
 using Server.Infrastructure.Helpers;
 using Server.Services.Answers;
+using Server.Services.Common;
 using Server.Services.Exams;
 using Server.Services.Identity;
 using Server.Services.Questions;
@@ -99,8 +100,11 @@ namespace Server
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "QuizSystem", Version = "v1"});
             });
 
-            // Data Services
+            //Identity Services
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<ICurrentUserService, CurrentUserService>();
+
+            // Data Services
             services.AddTransient<IExamService, ExamService>();
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IAnswerService, AnswerService>();
