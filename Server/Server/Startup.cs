@@ -82,6 +82,11 @@ namespace Server
                                 context.Response.Headers.Add("Token-Expired", "true");
                                 context.Response.BodyWriter.Write(bytes);
                             }
+                            else
+                            {
+                                var bytes = Encoding.ASCII.GetBytes("Invalid token");
+                                context.Response.BodyWriter.Write(bytes);
+                            }
 
                             return Task.CompletedTask;
                         }
