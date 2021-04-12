@@ -103,44 +103,5 @@ namespace Server.Services.Answers
 
             return true;
         }
-
-        // TODO: Add error responses
-        public async Task<bool> SaveAnswer(string userId, SaveAnswerInputModel model)
-        {
-            var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
-
-            var exam = await this.db.ExamParticipants.FirstOrDefaultAsync(x =>
-                x.ExamId == model.ExamId && x.UserId == userId);
-
-            if (exam == null)
-            {
-                return false;
-            }
-
-            var question = await this.db.Questions.FirstOrDefaultAsync(x => x.Id == model.QuestionId);
-
-            if (question == null)
-            {
-                return false;
-            }
-
-            if (question.Answers.Any(x => x.Id == model.AnswerId))
-            {
-                return false;
-            }
-
-            var entity = new UserAnswer()
-            {
-                User = user,
-                Exam = exam.Exam,
-                Question = question,
-                AnswerId = model.AnswerId
-            };
-
-            await this.db.UserAnswer.AddAsync(entity);
-            await this.db.SaveChangesAsync();
-
-            return true;
-        }
     }
 }

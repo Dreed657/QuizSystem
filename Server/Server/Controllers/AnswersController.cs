@@ -1,21 +1,17 @@
-﻿using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models.Answer;
 using Server.Services.Answers;
-using Server.Services.Common;
 
 namespace Server.Controllers
 {
     public class AnswersController : ApiController
     {
         private readonly IAnswerService answerService;
-        private readonly ICurrentUserService user;
 
-        public AnswersController(IAnswerService answerService, ICurrentUserService user)
+        public AnswersController(IAnswerService answerService)
         {
             this.answerService = answerService;
-            this.user = user;
         }
 
         [HttpGet]
@@ -68,20 +64,6 @@ namespace Server.Controllers
             }
 
             return Ok(result);
-        }
-
-        [HttpPost(nameof(SaveAnswer))]
-        public async Task<IActionResult> SaveAnswer(SaveAnswerInputModel model)
-        {
-            var userId = this.user.GetId();
-            var result = await this.answerService.SaveAnswer(userId, model);
-
-            if (!result)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(model);
         }
     }
 }
