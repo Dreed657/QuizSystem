@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Server.Data.Models;
 using Server.Data.Seeding.Contracts;
@@ -15,13 +16,12 @@ namespace Server.Data.Seeding
             if (!dbContext.Users.Any())
             {
                 var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                
-                await SeedAdminAsync(dbContext, userManager);
+
+                await SeedAdminAsync(userManager);
             }
         }
 
-        private static async Task SeedAdminAsync(ApplicationDbContext dbContext,
-            UserManager<ApplicationUser> userManager)
+        private static async Task SeedAdminAsync(UserManager<ApplicationUser> userManager)
         {
             var admin = await userManager.FindByNameAsync("Administrator01");
 
@@ -34,7 +34,7 @@ namespace Server.Data.Seeding
                 };
 
                 await userManager.CreateAsync(user, "password");
-                // TODO: Add roles to admin.
+                await userManager.AddToRoleAsync(user, "Administrator");
             }
         }
     }

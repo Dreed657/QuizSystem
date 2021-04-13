@@ -21,6 +21,7 @@ namespace Server.Data.Seeding
 
             var seeders = new List<ISeeder>()
             {
+                new RoleSeeder(),
                 new AdminSeeder(),
                 new ExamSeeder()
             };
