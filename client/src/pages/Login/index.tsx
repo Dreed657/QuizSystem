@@ -12,10 +12,9 @@ import {
     Form,
     FormControl,
     FormGroup,
-    Header,
-    Navbar,
     Panel,
 } from 'rsuite';
+import MasterHeader from '../../components/Header';
 
 import AuthService from '../../services/authService';
 import TokenService from '../../services/tokenService';
@@ -42,13 +41,7 @@ const LoginPage = () => {
 
     return (
         <Container appearance="inverse">
-            <Header>
-                <Navbar appearance="inverse">
-                    <Navbar.Header>
-                        <p className="navbar-brand logo">Brand</p>
-                    </Navbar.Header>
-                </Navbar>
-            </Header>
+            <MasterHeader></MasterHeader>
             <Content style={{ marginTop: 100 }}>
                 <FlexboxGrid justify="center">
                     <FlexboxGrid.Item colspan={12}>

@@ -83,21 +83,9 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPost("Join")]
-        public async Task<IActionResult> Join(int examId)
-        {
-            var userId = this.user.GetId();
-            var result = await this.examService.Join(userId, examId);
+        
 
-            if (result == null)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
-        }
-
-        [HttpPost("AddQuestion")]
+        [HttpPost(nameof(AddQuestion))]
         public async Task<IActionResult> AddQuestion(AddQuestionInputModel model)
         {
             var result = await this.examService.AddQuestion(model);
@@ -110,7 +98,7 @@ namespace Server.Controllers
             return Ok(result);
         }
 
-        [HttpPut("RemoveQuestion")]
+        [HttpPut(nameof(RemoveQuestion))]
         public async Task<IActionResult> RemoveQuestion(RemoveQuestionInputModel model)
         {
             var result = await this.examService.RemoveQuestion(model);
@@ -123,10 +111,25 @@ namespace Server.Controllers
             return Ok(result);
         }
 
+        [HttpPost(nameof(Start))]
+        public async Task<IActionResult> Start(int examId)
+        {
+            var userId = this.user.GetId();
+            var result = await this.examService.Join(userId, examId);
+
+            if (result == null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost(nameof(Finish))]
         public async Task<IActionResult> Finish(int examId)
         {
             var userId = this.user.GetId();
+            await this.examService.Finish(userId, examId);
 
             return Ok();
         }

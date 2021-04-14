@@ -1,52 +1,51 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
-import {
-    Container,
-    Content,
-    Header,
-    Loader,
-    Panel,
-    PanelGroup,
-    Placeholder,
-} from 'rsuite';
-import ExamShort from '../../components/ShortExam/Index';
+import { Container, Content, Loader, Panel, Button } from 'rsuite';
+
+import MasterHeader from '../../components/Header';
+import IShortExam from '../../models/IShortExam';
 
 import ExamService from '../../services/examService';
 
-interface IExam {
-    id: number;
-    name: string;
-    questions: number;
-}
-
 const HomePage = () => {
-    const { Paragraph } = Placeholder;
-    const [exams, setExams] = useState<IExam[]>();
+    const [exams, setExams] = useState<IShortExam[]>();
+
+    const history = useHistory();
 
     useEffect(() => {
         ExamService.getAll().then((res) => {
             setExams(res.data);
-            console.log(exams);
         });
     }, []);
 
     if (!exams) {
-        return <Loader size="lg" content="Loading...."></Loader>;
+        return <Loader size="lg" content="Loading...." center></Loader>;
     }
 
     return (
         <Container>
-            <Header>
-                <h3>Home page.</h3>
-            </Header>
+            <MasterHeader></MasterHeader>
             <Content>
                 {exams.map((exam) => {
                     return (
-                        <div key={exam.id}>
-                            <h3>{exam.name}</h3>
+                        <Panel
+                            style={{ margin: 20 }}
+                            key={exam.id}
+                            header={exam.name}
+                            bordered
+                        >
                             <sub>Id: {exam.id}</sub>
                             <p>Questions: {exam.questions}</p>
-                        </div>
+                            <Button
+                                appearance="primary"
+                                size="md"
+                                style={{ marginTop: 10, marginBottom: 10 }}
+                                onClick={() => history.push(`/exam/${exam.id}`)}
+                            >
+                                Start
+                            </Button>
+                        </Panel>
                     );
                 })}
             </Content>

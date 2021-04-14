@@ -3,8 +3,6 @@ import { useHistory } from 'react-router';
 
 import {
     Container,
-    Header,
-    Navbar,
     Content,
     FlexboxGrid,
     Panel,
@@ -15,6 +13,7 @@ import {
     ButtonToolbar,
     Button,
 } from 'rsuite';
+import MasterHeader from '../../components/Header';
 
 import AuthService from '../../services/authService';
 
@@ -44,13 +43,7 @@ const RegisterPage = () => {
 
     return (
         <Container appearance="inverse">
-            <Header>
-                <Navbar appearance="inverse">
-                    <Navbar.Header>
-                        <p className="navbar-brand logo">Brand</p>
-                    </Navbar.Header>
-                </Navbar>
-            </Header>
+            <MasterHeader></MasterHeader>
             <Content style={{ marginTop: 100 }}>
                 <FlexboxGrid justify="center">
                     <FlexboxGrid.Item colspan={12}>
@@ -61,9 +54,7 @@ const RegisterPage = () => {
                                     <FormControl
                                         name="username"
                                         type="text"
-                                        onChange={(value) =>
-                                            setUsername(value)
-                                        }
+                                        onChange={(value) => setUsername(value)}
                                     />
                                 </FormGroup>
                                 <FormGroup>
@@ -71,9 +62,7 @@ const RegisterPage = () => {
                                     <FormControl
                                         name="name"
                                         type="email"
-                                        onChange={(value) =>
-                                            setEmail(value)
-                                        }
+                                        onChange={(value) => setEmail(value)}
                                     />
                                 </FormGroup>
                                 <FormGroup>
@@ -81,9 +70,7 @@ const RegisterPage = () => {
                                     <FormControl
                                         name="password"
                                         type="password"
-                                        onChange={(value) =>
-                                            setPassword(value)
-                                        }
+                                        onChange={(value) => setPassword(value)}
                                     />
                                 </FormGroup>
                                 <FormGroup>
