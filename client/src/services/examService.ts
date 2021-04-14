@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
-import authHeader from '../utils/authHeader';
+import axiosInstance from '../utils/axiosUtils';
 
 const API_URL = 'https://localhost:44369/api';
 
@@ -12,7 +12,7 @@ interface IExam {
 
 class ExamService {
     getAll(): Promise<AxiosResponse<any>> {
-        return axios.get<IExam[]>(`${API_URL}/exams`, { headers: authHeader() });
+        return axiosInstance.get<IExam[]>(`${API_URL}/exams`);
     }
 }
 

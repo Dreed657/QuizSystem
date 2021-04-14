@@ -41,7 +41,13 @@ const HomePage = () => {
             </Header>
             <Content>
                 {exams.map((exam) => {
-                    <ExamShort id={exam.id} name={exam.name} questions={exam.questions}></ExamShort>
+                    return (
+                        <div key={exam.id}>
+                            <h3>{exam.name}</h3>
+                            <sub>Id: {exam.id}</sub>
+                            <p>Questions: {exam.questions}</p>
+                        </div>
+                    );
                 })}
             </Content>
         </Container>

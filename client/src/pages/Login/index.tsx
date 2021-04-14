@@ -18,6 +18,7 @@ import {
 } from 'rsuite';
 
 import AuthService from '../../services/authService';
+import TokenService from '../../services/tokenService';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ const LoginPage = () => {
         AuthService.login({ email, password })
             .then((res) => {
                 console.log(res);
-                AuthService.setToken(res.data.token);
+                TokenService.setToken(res.data.token);
                 history.push('/');
             })
             .catch((e) => {
