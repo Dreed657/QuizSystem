@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import './App.css';
-import 'rsuite/dist/styles/rsuite-default.css';
+import 'rsuite/dist/styles/rsuite-dark.css';
 
 import HomePage from './pages/Home';
 import ExamPage from './pages/Exam';

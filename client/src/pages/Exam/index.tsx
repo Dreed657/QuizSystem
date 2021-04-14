@@ -1,26 +1,22 @@
 import React from 'react';
+
+import { Container, Content, Header } from 'rsuite';
 import ExamSidebar from '../../components/ExamSidebar/Index';
 
-import { Placeholder, Grid, Row, Col, Loader } from 'rsuite';
-
 const ExamPage = () => {
-    const { Paragraph } = Placeholder;
-
     return (
-        <Grid fluid>
-            <Row className="show-grid">
-                <Col xs={4}>
-                    <h3>Exam Page.</h3>
-                    <ExamSidebar></ExamSidebar>
-                </Col>
-                <Col xs={8}>
-                    <Paragraph style={{ marginTop: 30 }} graph="circle" />
-                    <Paragraph style={{ marginTop: 30 }} graph="square" />
-                    <Paragraph style={{ marginTop: 30 }} graph="image" />
-                </Col>
-            </Row>
-            <Loader size="lg" content="Loading..."/>
-        </Grid>
+        <div className="show-fake-browser sidebar-page">
+            <Container>
+                <ExamSidebar />
+
+                <Container>
+                    <Header>
+                        <h2>Page Title</h2>
+                    </Header>
+                    <Content>Content</Content>
+                </Container>
+            </Container>
+        </div>
     );
 };
 
