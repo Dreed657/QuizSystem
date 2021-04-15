@@ -14,8 +14,6 @@ namespace Server.Data.Models
 
         public bool IsCorrect { get; set; }
 
-        public AnswerDifficulty Difficulty { get; set; }
-
         public int QuestionId { get; set; }
 
         public Question Question { get; set; }

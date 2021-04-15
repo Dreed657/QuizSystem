@@ -1,6 +1,6 @@
 ﻿namespace Server.Data.Models.Enums
 {
-    public enum AnswerDifficulty
+    public enum QuestionDifficulty
     {
         Easy = 1,
         Moderate = 2,

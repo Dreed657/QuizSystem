@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -186,7 +187,8 @@ namespace Server.Services.Exams
             exam.Participants.Add(new UserExam()
             {
                 Exam = exam,
-                User = user
+                User = user,
+                StartTime = DateTime.UtcNow
             });
             await this.db.SaveChangesAsync();
 
@@ -203,11 +205,12 @@ namespace Server.Services.Exams
 
             var correct = results.Count(x => x.Answer.IsCorrect);
             var wrong = results.Count - correct;
-            var score = results.Select(x => x.Answer.Difficulty).Cast<int>().Sum();
+            var score = results.Select(x => x.Question.Difficulty).Cast<int>().Sum();
 
             entity.Score = score;
             entity.CorrectAnswers = correct;
             entity.WrongAnswers = wrong;
+            entity.EndTime = DateTime.UtcNow;
 
             await this.db.SaveChangesAsync();
         }

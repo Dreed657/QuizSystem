@@ -2,11 +2,12 @@
 {
     public enum QuestionTypes
     {
-        MultiChoice = 0,
-        MultiResponse = 1,
+        SingleChoice = 0,
+        MultiChoice = 1,
         TrueFalse = 2,
-        ShortAnswer = 3,
-        Numeric = 4,
-        FillBlank = 5,
+        //MultiResponse = 3,
+        //ShortAnswer = 4,
+        //Numeric = 5,
+        //FillBlank = 6,
     }
 }
