@@ -13,38 +13,38 @@ namespace Server.Controllers
 {
     public class IdentityController : ApiController
     {
-        private readonly IIdentityService identity;
-        private readonly AppSettings appSettings;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IIdentityService _identity;
+        private readonly AppSettings _appSettings;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public IdentityController(IIdentityService identity, IOptions<AppSettings> appSettings,
             UserManager<ApplicationUser> userManager)
         {
-            this.identity = identity;
-            this.appSettings = appSettings.Value;
-            this.userManager = userManager;
+            this._identity = identity;
+            this._appSettings = appSettings.Value;
+            this._userManager = userManager;
         }
 
         [AllowAnonymous]
         [HttpPost(nameof(Login))]
         public async Task<IActionResult> Login([FromBody] LoginInputModel model)
         {
-            var user = await this.userManager.FindByEmailAsync(model.Email);
+            var user = await this._userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return Unauthorized(new {message = "Invalid Credentials."});
             }
 
-            var passwordValid = await this.userManager.CheckPasswordAsync(user, model.Password);
+            var passwordValid = await this._userManager.CheckPasswordAsync(user, model.Password);
             if (!passwordValid)
             {
                 return Unauthorized(new {message = "Invalid Credentials."});
             }
 
-            var token = this.identity.GenerateJwtToken(
+            var token = this._identity.GenerateJwtToken(
                 user.Id,
                 user.UserName,
-                this.appSettings.Secret);
+                this._appSettings.Secret);
 
             return Ok(new
             {
@@ -62,7 +62,9 @@ namespace Server.Controllers
                 UserName = model.UserName,
             };
 
-            var result = await this.userManager.CreateAsync(user, model.Password);
+            var result = await this._userManager.CreateAsync(user, model.Password);
+            await this._userManager.AddToRoleAsync(user, "Student");
+
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);
