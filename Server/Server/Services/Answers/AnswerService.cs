@@ -109,10 +109,10 @@ namespace Server.Services.Answers
         {
             var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
-            var exam = await this.db.ExamParticipants.FirstOrDefaultAsync(x =>
+            var examAttempt = await this.db.ExamParticipants.FirstOrDefaultAsync(x =>
                 x.ExamId == model.ExamId && x.UserId == userId);
 
-            if (exam == null)
+            if (examAttempt == null)
             {
                 return false;
             }
@@ -131,8 +131,7 @@ namespace Server.Services.Answers
 
             var entity = new UserAnswer()
             {
-                User = user,
-                Exam = exam.Exam,
+                ExamAttempt = examAttempt,
                 Question = question,
                 AnswerId = model.AnswerId
             };

@@ -167,7 +167,7 @@ namespace Server.Services.Exams
             return true;
         }
 
-        public async Task<bool> Join(string userId, int examId)
+        public async Task<bool> Start(string userId, int examId)
         {
             var exam = await this.db.Exams.FirstOrDefaultAsync(x => x.Id == examId);
 
@@ -196,8 +196,10 @@ namespace Server.Services.Exams
         // TODO: LOOK UP THIS
         public async Task Finish(string userId, int examId)
         {
-            var entity = await this.db.ExamParticipants.FirstOrDefaultAsync(x => x.ExamId == examId && x.UserId == userId);
-            var results = await this.db.UserAnswer.Where(x => x.UserId == userId && x.ExamId == examId).ToListAsync();
+            var entity = await this.db.ExamParticipants
+                .Include(x => x.UserAnswers)
+                .FirstOrDefaultAsync(x => x.ExamId == examId && x.UserId == userId);
+            var results = entity.UserAnswers;
 
             var correct = results.Count(x => x.Answer.IsCorrect);
             var wrong = results.Count - correct;

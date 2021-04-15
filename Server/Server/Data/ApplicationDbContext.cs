@@ -44,9 +44,6 @@ namespace Server.Data
             modelBuilder.Entity<ExamQuestion>()
                 .HasKey(x => new {x.QuestionId, x.ExamId});
 
-            modelBuilder.Entity<UserExam>()
-                .HasKey(x => new {x.ExamId, x.UserId});
-
             var entityTypes = modelBuilder.Model.GetEntityTypes().ToList();
 
             var foreignKeys = entityTypes.SelectMany(e =>

@@ -115,7 +115,7 @@ namespace Server.Controllers
         public async Task<IActionResult> Start(int examId)
         {
             var userId = this._user.GetId();
-            var result = await this._examService.Join(userId, examId);
+            var result = await this._examService.Start(userId, examId);
 
             if (result == null)
             {

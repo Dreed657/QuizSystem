@@ -20,6 +20,7 @@ namespace Server.Data.Seeding
                 {
                     Name = "Test Exam (Seeded)",
                     EntryCode = "test",
+                    Duration = TimeSpan.FromMinutes(5)
                 };
 
                 foreach (var question in questions)

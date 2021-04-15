@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,6 +22,8 @@ namespace Server.Data.Models
 
         [Required]
         public string EntryCode { get; set; }
+
+        public TimeSpan Duration { get; set; }
 
         public virtual ICollection<ExamQuestion> Questions { get; set; }
 

@@ -7,13 +7,9 @@ namespace Server.Data.Models
         [Key]
         public int Id { get; set; }
 
-        public int ExamId { get; set; }
+        public int ExamAttemptId { get; set; }
 
-        public virtual Exam Exam { get; set; }
-
-        public string UserId { get; set; }
-
-        public virtual ApplicationUser User { get; set; }
+        public virtual UserExam ExamAttempt { get; set; }
 
         public int QuestionId { get; set; }
 

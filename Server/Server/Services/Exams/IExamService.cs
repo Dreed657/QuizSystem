@@ -21,7 +21,7 @@ namespace Server.Services.Exams
 
         Task<bool> Delete(int examId);
         
-        Task<bool> Join(string userId, int examId);
+        Task<bool> Start(string userId, int examId);
 
         Task Finish(string userId, int examId);
     }
