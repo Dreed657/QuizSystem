@@ -40,7 +40,7 @@ const Question = (props: { id: number | undefined }) => {
     return (
         <Panel header={question.title}>
             {question.answers.map((answer) => {
-                return <Answer answer={answer} />;
+                return <Answer key={answer.id} answer={answer} />;
             })}
         </Panel>
     );

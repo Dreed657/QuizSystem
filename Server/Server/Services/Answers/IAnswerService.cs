@@ -15,5 +15,7 @@ namespace Server.Services.Answers
         Task<AnswerViewModel> Update(UpdateAnswerModel model);
 
         Task<bool> Delete(int id);
+
+        Task<bool> SaveAnswer(string userId, SaveAnswerInputModel model);
     }
 }

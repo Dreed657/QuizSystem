@@ -2,22 +2,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Models.Answer;
 using Server.Services.Answers;
+using Server.Services.Common;
 
 namespace Server.Controllers
 {
     public class AnswersController : ApiController
     {
-        private readonly IAnswerService answerService;
+        private readonly IAnswerService _answerService;
+        private readonly ICurrentUserService _user;
 
-        public AnswersController(IAnswerService answerService)
+        public AnswersController(IAnswerService answerService, ICurrentUserService user)
         {
-            this.answerService = answerService;
+            this._answerService = answerService;
+            this._user = user;
         }
 
         [HttpGet]
         public async Task<IActionResult> index(int Id)
         {
-            var result = await this.answerService.GetById(Id);
+            var result = await this._answerService.GetById(Id);
 
             if (result == null)
             {
@@ -30,7 +33,7 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateAnswerModel model)
         {
-            var result = await this.answerService.Create(model);
+            var result = await this._answerService.Create(model);
 
             if (result == null)
             {
@@ -43,7 +46,7 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateAnswerModel model)
         {
-            var result = await this.answerService.Update(model);
+            var result = await this._answerService.Update(model);
 
             if (result == null)
             {
@@ -56,7 +59,7 @@ namespace Server.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await this.answerService.Delete(id);
+            var result = await this._answerService.Delete(id);
 
             if (!result)
             {
@@ -64,6 +67,20 @@ namespace Server.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPost(nameof(SaveAnswer))]
+        public async Task<IActionResult> SaveAnswer(SaveAnswerInputModel model)
+        {
+            var userId = this._user.GetId();
+            var result = await this._answerService.SaveAnswer(userId, model);
+
+            if (!result)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(model);
         }
     }
 }

@@ -11,19 +11,19 @@ namespace Server.Controllers
 {
     public class QuestionsController : ApiController
     {
-        private readonly IQuestionService questionService;
-        private readonly IAnswerService answerService;
+        private readonly IQuestionService _questionService;
+        private readonly IAnswerService _answerService;
 
         public QuestionsController(IQuestionService questionService, IAnswerService answerService)
         {
-            this.questionService = questionService;
-            this.answerService = answerService;
+            this._questionService = questionService;
+            this._answerService = answerService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await this.questionService.GetAll();
+            var result = await this._questionService.GetAll();
 
             if (result == null)
             {
@@ -36,7 +36,7 @@ namespace Server.Controllers
         [HttpGet("addable/{examId}")]
         public async Task<IActionResult> GetAllAddable(int examId)
         {
-            var result = await this.questionService.GetAllAddable(examId);
+            var result = await this._questionService.GetAllAddable(examId);
 
             if (result == null)
             {
@@ -49,7 +49,7 @@ namespace Server.Controllers
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById(int Id)
         {
-            var result = await this.questionService.GetById(Id);
+            var result = await this._questionService.GetById(Id);
 
             if (result == null)
             {
@@ -62,7 +62,7 @@ namespace Server.Controllers
         [HttpGet("Exam/{ExamId}")]
         public async Task<IActionResult> GetExamQuestions(int ExamId)
         {
-            var result = await this.questionService.GetAllForExam(ExamId);
+            var result = await this._questionService.GetAllForExam(ExamId);
 
             if (result == null)
             {
@@ -75,7 +75,7 @@ namespace Server.Controllers
         [HttpGet("Answers/{QuestionId}")]
         public async Task<IActionResult> GetQuestionAnswers(int questionId)
         {
-            var result = await this.answerService.GetByQuestionId(questionId);
+            var result = await this._answerService.GetByQuestionId(questionId);
 
             if (result == null)
             {
@@ -93,7 +93,7 @@ namespace Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await this.questionService.Create(model);
+            var result = await this._questionService.Create(model);
 
             if (result == null)
             {
@@ -106,7 +106,7 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateQuestionModel model)
         {
-            var result = await this.questionService.Update(model);
+            var result = await this._questionService.Update(model);
 
             if (result == null)
             {
@@ -119,7 +119,7 @@ namespace Server.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await this.questionService.Delete(id);
+            var result = await this._questionService.Delete(id);
 
             if (!result)
             {

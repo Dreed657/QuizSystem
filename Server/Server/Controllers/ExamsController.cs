@@ -9,19 +9,19 @@ namespace Server.Controllers
 {
     public class ExamsController : ApiController
     {
-        private readonly IExamService examService;
-        private readonly ICurrentUserService user;
+        private readonly IExamService _examService;
+        private readonly ICurrentUserService _user;
 
         public ExamsController(IExamService examService, ICurrentUserService user)
         {
-            this.examService = examService;
-            this.user = user;
+            this._examService = examService;
+            this._user = user;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int Id)
         {
-            var result = await this.examService.GetById(Id);
+            var result = await this._examService.GetById(Id);
 
             if (result == null)
             {
@@ -34,7 +34,7 @@ namespace Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await this.examService.GetAll();
+            var result = await this._examService.GetAll();
             
             if (result == null)
             {
@@ -47,7 +47,7 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateExamModel model)
         {
-            var result = await this.examService.Create(model);
+            var result = await this._examService.Create(model);
 
             if (result == null)
             {
@@ -60,7 +60,7 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateExamModel model)
         {
-            var result = await this.examService.Update(model);
+            var result = await this._examService.Update(model);
 
             if (result == null)
             {
@@ -73,7 +73,7 @@ namespace Server.Controllers
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(int Id)
         {
-            var result = await this.examService.Delete(Id);
+            var result = await this._examService.Delete(Id);
 
             if (!result)
             {
@@ -88,7 +88,7 @@ namespace Server.Controllers
         [HttpPost(nameof(AddQuestion))]
         public async Task<IActionResult> AddQuestion(AddQuestionInputModel model)
         {
-            var result = await this.examService.AddQuestion(model);
+            var result = await this._examService.AddQuestion(model);
 
             if (!result)
             {
@@ -101,7 +101,7 @@ namespace Server.Controllers
         [HttpPut(nameof(RemoveQuestion))]
         public async Task<IActionResult> RemoveQuestion(RemoveQuestionInputModel model)
         {
-            var result = await this.examService.RemoveQuestion(model);
+            var result = await this._examService.RemoveQuestion(model);
 
             if (!result)
             {
@@ -114,8 +114,8 @@ namespace Server.Controllers
         [HttpPost(nameof(Start))]
         public async Task<IActionResult> Start(int examId)
         {
-            var userId = this.user.GetId();
-            var result = await this.examService.Join(userId, examId);
+            var userId = this._user.GetId();
+            var result = await this._examService.Join(userId, examId);
 
             if (result == null)
             {
@@ -128,8 +128,8 @@ namespace Server.Controllers
         [HttpPost(nameof(Finish))]
         public async Task<IActionResult> Finish(int examId)
         {
-            var userId = this.user.GetId();
-            await this.examService.Finish(userId, examId);
+            var userId = this._user.GetId();
+            await this._examService.Finish(userId, examId);
 
             return Ok();
         }

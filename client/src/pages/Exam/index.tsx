@@ -61,6 +61,7 @@ const ExamPage = () => {
                             {exam?.questions.map((q, index) => {
                                 return (
                                     <Nav.Item
+                                        key={index}
                                         eventKey="solutions"
                                         active={selectedId === q.id}
                                         onSelect={() => setSelectedId(q.id)}
