@@ -107,8 +107,6 @@ namespace Server.Services.Answers
         // TODO: Add error responses
         public async Task<bool> SaveAnswer(string userId, SaveAnswerInputModel model)
         {
-            var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
-
             var examAttempt = await this.db.ExamParticipants.FirstOrDefaultAsync(x =>
                 x.ExamId == model.ExamId && x.UserId == userId);
 

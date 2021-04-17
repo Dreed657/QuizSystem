@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
-using Server.Models.Answer;
 using Server.Models.Common;
 using Server.Models.Exam;
 using Server.Models.Question;
@@ -28,7 +27,7 @@ namespace Server.Services.Exams
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Duration = x.Duration,
+                    Duration = x.Duration.ToString(),
                     Questions = x.Questions.Count
                 })
                 .ToListAsync();
@@ -46,7 +45,7 @@ namespace Server.Services.Exams
                 Id = entity.Id,
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
-                Duration = entity.Duration,
+                Duration = entity.Duration.ToString(),
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,
@@ -105,7 +104,7 @@ namespace Server.Services.Exams
             {
                 Name = model.Name,
                 EntryCode = model.EntryCode,
-                Duration = model.Duration
+                Duration = TimeSpan.Parse(model.Duration)
             };
 
             await this.db.Exams.AddAsync(entity);
@@ -116,7 +115,7 @@ namespace Server.Services.Exams
                 Id = entity.Id,
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
-                Duration = entity.Duration,
+                Duration = entity.Duration.ToString(),
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,
@@ -138,7 +137,7 @@ namespace Server.Services.Exams
 
             entity.Name = model.Name;
             entity.EntryCode = model.EntryCode;
-            entity.Duration = model.Duration;
+            entity.Duration = TimeSpan.Parse(model.Duration);
 
             await db.SaveChangesAsync();
 
@@ -147,7 +146,7 @@ namespace Server.Services.Exams
                 Id = entity.Id,
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
-                Duration = entity.Duration,
+                Duration = entity.Duration.ToString(),
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,

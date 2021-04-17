@@ -34,7 +34,7 @@
       />
     </div>
     <div class="row">
-      <button type="submit" class="btn btn-primary">Sing Up!</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Sing Up!</button>
       <a class="btn btn-primary" [routerLink]="['/login']">
         Already have an account?
       </a>

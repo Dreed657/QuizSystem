@@ -26,6 +26,7 @@ export class UpdateComponent implements OnInit {
       id: [''],
       name: ['', [Validators.required]],
       entryCode: ['', [Validators.required]],
+      duration: ['', [Validators.required, Validators.pattern('[0-9]{2}:[0-9]{2}:[0-9]{2}')]]
     });
   }
 

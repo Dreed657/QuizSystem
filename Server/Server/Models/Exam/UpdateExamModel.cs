@@ -13,6 +13,6 @@ namespace Server.Models.Exam
 
         public string EntryCode { get; set; }
      
-        public TimeSpan Duration { get; set; }
+        public string Duration { get; set; }
     }
 }

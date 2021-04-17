@@ -20,6 +20,7 @@ export class CreateComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       entryCode: ['', [Validators.required]],
+      duration: ['', [Validators.required, Validators.pattern('[0-9]{2}:[0-9]{2}:[0-9]{2}')]]
     });
   }
 

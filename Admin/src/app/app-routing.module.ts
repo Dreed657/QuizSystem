@@ -21,8 +21,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: ErrorComponent
-  }
+    component: ErrorComponent,
+  },
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

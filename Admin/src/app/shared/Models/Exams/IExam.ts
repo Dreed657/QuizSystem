@@ -4,5 +4,6 @@ export interface IExam {
     id: Number;
     name: String;
     entryCode: String;
+    duration: String;
     questions: IQuestion[];
 }

@@ -1,11 +1,14 @@
-<nav id="sidebar">
+<nav *ngIf="!hidden" id="sidebar">
   <div class="sidebar-header">
     <h3>Bootstrap Sidebar</h3>
   </div>
 
   <ul class="list-unstyled components">
     <p>Dummy Heading</p>
-    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+    <li
+      [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <a [routerLink]="['/']">Home</a>
     </li>
     <li [routerLinkActive]="['active']">
@@ -15,27 +18,10 @@
       <a [routerLink]="['/questions']">Questions bank</a>
     </li>
     <li [routerLinkActive]="['active']">
-      <a
-        href="#pageSubmenu"
-        data-toggle="collapse"
-        aria-expanded="false"
-        class="dropdown-toggle"
-        >Pages</a
-      >
-      <ul class="collapse list-unstyled" id="pageSubmenu">
-        <li>
-          <a href="#">Page 1</a>
-        </li>
-        <li>
-          <a href="#">Page 2</a>
-        </li>
-        <li>
-          <a href="#">Page 3</a>
-        </li>
-      </ul>
-    </li>
-    <li [routerLinkActive]="['active']">
       <a [routerLink]="['/contacts']">Contact</a>
+    </li>
+    <li (click)="logoutHandler()">
+      <a>LogOut!</a>
     </li>
   </ul>
 

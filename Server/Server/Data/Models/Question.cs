@@ -12,9 +12,11 @@ namespace Server.Data.Models
             this.Exams = new HashSet<ExamQuestion>();
         }
 
-        [Key] public int Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-        [Required] public string Title { get; set; }
+        [Required]
+        public string Title { get; set; }
 
         public QuestionTypes Type { get; set; }
 
