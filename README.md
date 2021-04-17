@@ -20,6 +20,9 @@
 - RSuite
 - Axios
 
+#### Db Schema
+![DB](https://i.imgur.com/I0mB1Fn.png)
+
 #### Client current state
 ![Short-Gif](https://i.gyazo.com/a808613a703eab8090d97efe64da5891.gif)
 
