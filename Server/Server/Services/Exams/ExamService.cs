@@ -28,6 +28,7 @@ namespace Server.Services.Exams
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    Duration = x.Duration,
                     Questions = x.Questions.Count
                 })
                 .ToListAsync();
@@ -45,6 +46,7 @@ namespace Server.Services.Exams
                 Id = entity.Id,
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
+                Duration = entity.Duration,
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,
@@ -103,7 +105,7 @@ namespace Server.Services.Exams
             {
                 Name = model.Name,
                 EntryCode = model.EntryCode,
-                // Password = model.Password
+                Duration = model.Duration
             };
 
             await this.db.Exams.AddAsync(entity);
@@ -114,6 +116,7 @@ namespace Server.Services.Exams
                 Id = entity.Id,
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
+                Duration = entity.Duration,
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,
@@ -135,6 +138,7 @@ namespace Server.Services.Exams
 
             entity.Name = model.Name;
             entity.EntryCode = model.EntryCode;
+            entity.Duration = model.Duration;
 
             await db.SaveChangesAsync();
 
@@ -143,6 +147,7 @@ namespace Server.Services.Exams
                 Id = entity.Id,
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
+                Duration = entity.Duration,
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,

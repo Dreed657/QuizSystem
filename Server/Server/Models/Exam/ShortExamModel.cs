@@ -11,6 +11,8 @@ namespace Server.Models.Exam
 
         public string Name { get; set; }
 
+        public TimeSpan Duration { get; set; }
+
         public int Questions { get; set; }
     }
 }

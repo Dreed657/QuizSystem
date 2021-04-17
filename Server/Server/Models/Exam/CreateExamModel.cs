@@ -1,4 +1,6 @@
-﻿namespace Server.Models.Exam
+﻿using System;
+
+namespace Server.Models.Exam
 {
     public class CreateExamModel
     {
@@ -6,6 +8,6 @@
 
         public string EntryCode { get; set; }
 
-        //public string Password { get; set; }
+        public TimeSpan Duration { get; set; }
     }
 }

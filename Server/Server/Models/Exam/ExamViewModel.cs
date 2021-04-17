@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Server.Models.Question;
 
 namespace Server.Models.Exam
@@ -10,6 +11,8 @@ namespace Server.Models.Exam
         public string Name { get; set; }
 
         public string EntryCode { get; set; }
+
+        public TimeSpan Duration { get; set; }
 
         public ICollection<ShortQuestionModel> Questions { get; set; }
     }
