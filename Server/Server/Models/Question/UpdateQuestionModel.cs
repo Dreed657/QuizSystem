@@ -11,5 +11,8 @@ namespace Server.Models.Question
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public QuestionTypes Type { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public QuestionDifficulty Difficulty { get; set; }
     }
 }

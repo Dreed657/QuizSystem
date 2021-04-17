@@ -12,6 +12,8 @@ namespace Server.Models.Question
 
         public string Type { get; set; }
 
+        public string Difficulty { get; set; }
+
         public ICollection<AnswerViewModel> Answers { get; set; }
     }
 }

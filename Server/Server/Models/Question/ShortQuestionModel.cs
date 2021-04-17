@@ -14,6 +14,8 @@ namespace Server.Models.Question
 
         public string Type { get; set; }
 
+        public string Difficulty { get; set; }
+
         public int Answers { get; set; }
     }
 }

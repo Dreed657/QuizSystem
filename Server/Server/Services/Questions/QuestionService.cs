@@ -25,6 +25,7 @@ namespace Server.Services.Questions
                 Id = x.Id,
                 Title = x.Title,
                 Type = x.Type.ToString(),
+                Difficulty = x.Difficulty.ToString(),
                 Answers = x.Answers.Select(a => new AnswerViewModel()
                 {
                     Id = a.Id,
@@ -43,6 +44,7 @@ namespace Server.Services.Questions
                 Id = x.Id,
                 Title = x.Title,
                 Type = x.Type.ToString(),
+                Difficulty = x.Difficulty.ToString(),
                 Answers = x.Answers.Select(a => new AnswerViewModel()
                 {
                     Id = a.Id,
@@ -61,6 +63,7 @@ namespace Server.Services.Questions
                     Id = x.Id,
                     Title = x.Title,
                     Type = x.Type.ToString(),
+                    Difficulty = x.Difficulty.ToString(),
                     Answers = x.Answers.Select(a => new AnswerViewModel()
                     {
                         Id = a.Id,
@@ -82,6 +85,7 @@ namespace Server.Services.Questions
                 Id = x.Question.Id,
                 Title = x.Question.Title,
                 Type = x.Question.Type.ToString(),
+                Difficulty = x.Question.Difficulty.ToString(),
                 Answers = x.Question.Answers.Select(a => new AnswerViewModel()
                 {
                     Id = a.Id,
@@ -97,7 +101,8 @@ namespace Server.Services.Questions
             var question = new Question()
             {
                 Title = model.Title,
-                Type = model.Type
+                Type = model.Type,
+                Difficulty = model.Difficulty,
             };
 
             await this.db.AddAsync(question);
@@ -108,6 +113,7 @@ namespace Server.Services.Questions
                 Id = question.Id,
                 Title = question.Title,
                 Type = question.Type.ToString(),
+                Difficulty = question.Difficulty.ToString(),
                 Answers = question.Answers.Select(a => new AnswerViewModel()
                 {
                     Id = a.Id,
@@ -128,6 +134,7 @@ namespace Server.Services.Questions
 
             entity.Title = model.Title;
             entity.Type = model.Type;
+            entity.Difficulty = model.Difficulty;
 
             await this.db.SaveChangesAsync();
 
@@ -136,6 +143,7 @@ namespace Server.Services.Questions
                 Id = entity.Id,
                 Title = entity.Title,
                 Type = entity.Type.ToString(),
+                Difficulty = entity.Difficulty.ToString(),
                 Answers = entity.Answers.Select(a => new AnswerViewModel()
                 {
                     Id = a.Id,
