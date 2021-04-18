@@ -36,6 +36,7 @@ const HomePage = () => {
                             bordered
                         >
                             <sub>Id: {exam.id}</sub>
+                            <p>Duration: {exam.duration}</p>
                             <p>Questions: {exam.questions}</p>
                             <Button
                                 appearance="primary"

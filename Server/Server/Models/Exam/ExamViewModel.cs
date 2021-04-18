@@ -14,6 +14,8 @@ namespace Server.Models.Exam
 
         public string Duration { get; set; }
 
+        public string DurationInMs { get; set; }
+
         public ICollection<ShortQuestionModel> Questions { get; set; }
     }
 }

@@ -45,7 +45,7 @@ export class AppInterceptor implements HttpInterceptor {
       }),
       catchError((err: any) => {
         // handle error responses
-        if (err instanceof HttpErrorResponse) {
+        if (err instanceof HttpErrorResponse && (err.status == 401 || err.status == 403)) {
           this.auth.removeToken();
           this.router.navigate(['/login']);
         }
