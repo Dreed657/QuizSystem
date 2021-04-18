@@ -200,10 +200,18 @@ namespace Server.Services.Exams
         }
 
         // TODO: LOOK UP THIS
-        public async Task Finish(string userId, int examId)
+        public async Task<FinishExamModel> Finish(string userId, int examId)
         {
+            if (examId == 0)
+            {
+                return null;
+            }
+                
             var entity = await this.db.ExamParticipants
                 .Include(x => x.UserAnswers)
+                .ThenInclude(x => x.Answer)
+                .Include(x => x.UserAnswers)
+                .ThenInclude(x => x.Question)
                 .FirstOrDefaultAsync(x => x.ExamId == examId && x.UserId == userId);
             var results = entity.UserAnswers;
 
@@ -217,6 +225,15 @@ namespace Server.Services.Exams
             entity.EndTime = DateTime.UtcNow;
 
             await this.db.SaveChangesAsync();
+
+            return new FinishExamModel()
+            {
+                Score = entity.Score,
+                CorrectAnswers = entity.CorrectAnswers,
+                WrongAnswers = entity.WrongAnswers,
+                StartTime = entity.StartTime,
+                EndTime = entity.EndTime
+            };
         }
     }
 }
