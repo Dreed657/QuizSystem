@@ -15,7 +15,7 @@ import ExamService from '../../services/examService';
 
 import IExam from '../../models/IExam';
 import Question from '../../components/Question';
-import Countdown, { CountdownRenderProps } from 'react-countdown';
+import Countdown from 'react-countdown';
 import timespanConverter from '../../utils/timespanConverter';
 
 interface ParamTypes {

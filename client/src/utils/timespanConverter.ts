@@ -1,4 +1,4 @@
-class TimeSpanConvert {
+class TimeSpanConverter {
     convertFromStringInMs(timespan: string): Date {
         let date = new Date(Date.now() + parseInt(timespan));
 
@@ -6,4 +6,4 @@ class TimeSpanConvert {
     }
 }
 
-export default new TimeSpanConvert();
+export default new TimeSpanConverter();

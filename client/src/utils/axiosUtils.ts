@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
         return res;
     },
     async function (error) {
-        if (error.response.status === 401) {
+        if (error.response.status === 401 || error.response.status === 403) {
             TokenService.removeToken();
 
             //TODO: find react way of doing this
