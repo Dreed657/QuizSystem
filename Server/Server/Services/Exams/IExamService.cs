@@ -23,6 +23,6 @@ namespace Server.Services.Exams
         
         Task<bool> Start(string userId, int examId);
 
-        Task Finish(string userId, int examId);
+        Task<FinishExamModel> Finish(string userId, int examId);
     }
 }

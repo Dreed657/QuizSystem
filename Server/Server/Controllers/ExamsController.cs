@@ -129,9 +129,14 @@ namespace Server.Controllers
         public async Task<IActionResult> Finish(int examId)
         {
             var userId = this._user.GetId();
-            await this._examService.Finish(userId, examId);
+            var result = await this._examService.Finish(userId, examId);
 
-            return Ok();
+            if (result == null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
     }
 }
