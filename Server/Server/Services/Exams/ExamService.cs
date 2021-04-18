@@ -217,7 +217,11 @@ namespace Server.Services.Exams
 
             var correct = results.Count(x => x.Answer.IsCorrect);
             var wrong = results.Count - correct;
-            var score = results.Select(x => x.Question.Difficulty).Cast<int>().Sum();
+            var score = results
+                .Where(x => x.Answer.IsCorrect)
+                .Select(x => x.Question.Difficulty)
+                .Cast<int>()
+                .Sum();
 
             entity.Score = score;
             entity.CorrectAnswers = correct;
