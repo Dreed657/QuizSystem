@@ -107,22 +107,28 @@ namespace Server.Services.Answers
         // TODO: Add error responses
         public async Task<bool> SaveAnswer(string userId, SaveAnswerInputModel model)
         {
-            var examAttempt = await this.db.ExamParticipants.FirstOrDefaultAsync(x =>
-                x.ExamId == model.ExamId && x.UserId == userId);
+            var examAttempt = await this.db.ExamParticipants.FirstOrDefaultAsync(x => x.Id == model.ExamParticipationId);
 
             if (examAttempt == null)
             {
                 return false;
             }
 
-            var question = await this.db.Questions.FirstOrDefaultAsync(x => x.Id == model.QuestionId);
+            if (examAttempt.UserId != userId)
+            {
+                return false;
+            }
+
+            var question = await this.db.Questions
+                .Include(x => x.Answers)
+                .FirstOrDefaultAsync(x => x.Id == model.QuestionId);
 
             if (question == null)
             {
                 return false;
             }
 
-            if (question.Answers.Any(x => x.Id == model.AnswerId))
+            if (question.Answers.All(x => x.Id != model.AnswerId))
             {
                 return false;
             }

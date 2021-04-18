@@ -46,6 +46,7 @@ namespace Server.Services.Exams
                 Name = entity.Name,
                 EntryCode = entity.EntryCode,
                 Duration = entity.Duration.ToString(),
+                DurationInMs = entity.Duration.TotalMilliseconds.ToString(),
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
                     Id = x.Question.Id,
@@ -188,7 +189,7 @@ namespace Server.Services.Exams
                 return false;
             }
 
-            exam.Participants.Add(new UserExam()
+            await this.db.ExamParticipants.AddAsync(new UserExam()
             {
                 Exam = exam,
                 User = user,
@@ -206,7 +207,7 @@ namespace Server.Services.Exams
             {
                 return null;
             }
-                
+
             var entity = await this.db.ExamParticipants
                 .Include(x => x.UserAnswers)
                 .ThenInclude(x => x.Answer)
