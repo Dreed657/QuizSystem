@@ -41,9 +41,12 @@ namespace Server.Controllers
                 return Unauthorized(new {message = "Invalid Credentials."});
             }
 
+            var roles = await this._userManager.GetRolesAsync(user);
+
             var token = this._identity.GenerateJwtToken(
                 user.Id,
                 user.UserName,
+                roles,
                 this._appSettings.Secret);
 
             return Ok(new
