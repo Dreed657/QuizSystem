@@ -112,7 +112,7 @@ namespace Server.Controllers
         }
 
         [HttpPost(nameof(Start))]
-        public async Task<IActionResult> Start(int examId)
+        public async Task<IActionResult> Start([FromQuery] int examId)
         {
             var userId = this._user.GetId();
             var result = await this._examService.Start(userId, examId);
@@ -126,7 +126,7 @@ namespace Server.Controllers
         }
 
         [HttpPost(nameof(Finish))]
-        public async Task<IActionResult> Finish(int examId)
+        public async Task<IActionResult> Finish([FromQuery] int examId)
         {
             var userId = this._user.GetId();
             var result = await this._examService.Finish(userId, examId);

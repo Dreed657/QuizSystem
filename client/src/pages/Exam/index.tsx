@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import {
     Container,
     Content,
@@ -9,6 +9,7 @@ import {
     Icon,
     Navbar,
     Loader,
+    Button,
 } from 'rsuite';
 
 import ExamService from '../../services/examService';
@@ -17,6 +18,7 @@ import IExam from '../../models/IExam';
 import Question from '../../components/Question';
 import Countdown from 'react-countdown';
 import timespanConverter from '../../utils/timespanConverter';
+import examService from '../../services/examService';
 
 interface ParamTypes {
     id: string;
@@ -29,20 +31,33 @@ const ExamPage = () => {
     const [exam, setExam] = useState<IExam>();
     const { id } = useParams<ParamTypes>();
 
+    const history = useHistory();
+
     useEffect(() => {
         ExamService.getById(id).then((res) => {
             setDuration(
-                timespanConverter.convertFromStringInMs(res.data.durationInMs ?? '')
+                timespanConverter.convertFromStringInMs(
+                    res.data.durationInMs ?? ''
+                )
             );
             setExam(res.data);
             setSelectedId(res.data?.questions[0].id);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // console.log('Duration: ', duration?.valueOf());
 
     const ranOutOfTime = (): void => {
         console.log('DONE');
+    };
+
+    const finishHandler = (examId: string): void => {
+        examService
+            .finish(examId)
+            .then((x) => {
+                console.log(x);
+                history.push(`/`);
+            })
+            .then((x) => console.warn(x));
     };
 
     if (!exam) {
@@ -56,11 +71,7 @@ const ExamPage = () => {
                     <Navbar appearance="inverse">
                         <Navbar.Body>
                             <Nav>
-                                <Link to="/">
-                                    <Nav.Item icon={<Icon icon="home" />}>
-                                        Home
-                                    </Nav.Item>
-                                </Link>
+                                <Nav.Item>{exam.name}</Nav.Item>
                             </Nav>
                             <Nav pullRight>
                                 <Nav.Item icon={<Icon icon="clock-o" />}>
@@ -71,6 +82,13 @@ const ExamPage = () => {
                                         zeroPadTime={2}
                                         onComplete={ranOutOfTime}
                                     />
+                                </Nav.Item>
+                                <Nav.Item
+                                    onClick={() =>
+                                        finishHandler(exam.id.toString())
+                                    }
+                                >
+                                    Finish
                                 </Nav.Item>
                                 <Nav.Item icon={<Icon icon="cog" />}>
                                     Settings
@@ -93,6 +111,16 @@ const ExamPage = () => {
                                         eventKey="solutions"
                                         active={selectedId === q.id}
                                         onSelect={() => setSelectedId(q.id)}
+                                        icon={
+                                            selectedId === q.id ? (
+                                                <Icon
+                                                    icon="check"
+                                                    style={{ color: '#1f7505' }}
+                                                />
+                                            ) : (
+                                                <i></i>
+                                            )
+                                        }
                                     >
                                         Question {index + 1}
                                     </Nav.Item>
@@ -101,7 +129,7 @@ const ExamPage = () => {
                         </Nav>
                     </Sidebar>
                     <Content style={{ marginLeft: 20 }}>
-                        <Question id={selectedId}></Question>
+                        <Question id={selectedId} examId={exam.id}></Question>
                     </Content>
                 </Container>
             </Container>

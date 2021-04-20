@@ -2,7 +2,7 @@
 {
     public class SaveAnswerInputModel
     {
-        public int ExamParticipationId { get; set; }
+        public int ExamId { get; set; }
 
         public int QuestionId { get; set; }
 

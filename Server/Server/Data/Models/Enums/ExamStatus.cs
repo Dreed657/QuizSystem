@@ -2,7 +2,7 @@
 {
     public enum ExamStatus
     {
-        Finished = 0,
-        NotFinished = 1
+        Started = 0,
+        Finished = 1
     }
 }

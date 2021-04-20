@@ -132,9 +132,9 @@ namespace Server
 
             app.UseCors(options =>
                 options
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
                     .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
             );
 
             app.UseAuthentication();

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
+using Server.Data.Models.Enums;
 using Server.Models.Common;
 using Server.Models.Exam;
 using Server.Models.Question;
@@ -193,7 +194,8 @@ namespace Server.Services.Exams
             {
                 Exam = exam,
                 User = user,
-                StartTime = DateTime.UtcNow
+                StartTime = DateTime.UtcNow,
+                Status = ExamStatus.Started
             });
             await this.db.SaveChangesAsync();
 
@@ -209,6 +211,7 @@ namespace Server.Services.Exams
             }
 
             var entity = await this.db.ExamParticipants
+                .Where(x => x.Status == ExamStatus.Started)
                 .Include(x => x.UserAnswers)
                 .ThenInclude(x => x.Answer)
                 .Include(x => x.UserAnswers)
@@ -224,10 +227,13 @@ namespace Server.Services.Exams
                 .Cast<int>()
                 .Sum();
 
+            this.db.Attach(entity);
+
             entity.Score = score;
             entity.CorrectAnswers = correct;
             entity.WrongAnswers = wrong;
             entity.EndTime = DateTime.UtcNow;
+            entity.Status = ExamStatus.Finished;
 
             await this.db.SaveChangesAsync();
 

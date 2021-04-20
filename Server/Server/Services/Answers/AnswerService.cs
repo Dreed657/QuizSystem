@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
+using Server.Data.Models.Enums;
 using Server.Models.Answer;
 
 namespace Server.Services.Answers
@@ -107,7 +108,9 @@ namespace Server.Services.Answers
         // TODO: Add error responses
         public async Task<bool> SaveAnswer(string userId, SaveAnswerInputModel model)
         {
-            var examAttempt = await this.db.ExamParticipants.FirstOrDefaultAsync(x => x.Id == model.ExamParticipationId);
+            var examAttempt = await this.db.ExamParticipants
+                .Where(x => x.Status == ExamStatus.Started)
+                .FirstOrDefaultAsync(x => x.ExamId == model.ExamId && x.UserId == userId);
 
             if (examAttempt == null)
             {

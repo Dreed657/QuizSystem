@@ -19,6 +19,15 @@ const HomePage = () => {
         });
     }, []);
 
+    const startHanlder = (examId: string) => {
+        ExamService.start(examId)
+            .then((x) => {
+                console.log(x);
+                history.push(`/exam/${examId}`);
+            })
+            .then((x) => console.warn(x));
+    };
+
     if (!exams) {
         return <Loader size="lg" content="Loading...." center></Loader>;
     }
@@ -42,7 +51,7 @@ const HomePage = () => {
                                 appearance="primary"
                                 size="md"
                                 style={{ marginTop: 10, marginBottom: 10 }}
-                                onClick={() => history.push(`/exam/${exam.id}`)}
+                                onClick={() => startHanlder(exam.id.toString())}
                             >
                                 Start
                             </Button>

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 
-import { Placeholder, Panel, Loader } from 'rsuite';
-
-import Answer from '../Answer';
+import { Placeholder, Panel } from 'rsuite';
 
 import QuestionService from '../../services/questionService';
 import IQuestion from '../../models/IQuestion';
+import Answers from '../Answers';
 
-const Question = (props: { id: number | undefined }) => {
+const Question = (props: { id: number | undefined; examId: number }) => {
     const { Paragraph } = Placeholder;
 
     const [question, setQuestion] = useState<IQuestion>();
@@ -39,9 +38,14 @@ const Question = (props: { id: number | undefined }) => {
 
     return (
         <Panel header={question.title}>
-            {question.answers.map((answer) => {
-                return <Answer key={answer.id} answer={answer} />;
-            })}
+            <p>{question.type}</p>
+
+            <Answers
+                answers={question.answers}
+                type={question.type}
+                examId={props.examId}
+                questionId={question.id}
+            />
         </Panel>
     );
 };

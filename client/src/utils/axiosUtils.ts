@@ -27,11 +27,11 @@ axiosInstance.interceptors.response.use(
         return res;
     },
     async function (error) {
-        if (error.response.status === 401 || error.response.status === 403) {
+        if (error?.response.status === 401 || error?.response.status === 403) {
             TokenService.removeToken();
 
             //TODO: find react way of doing this
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = '/login';
         }
 
         return Promise.reject(error);
