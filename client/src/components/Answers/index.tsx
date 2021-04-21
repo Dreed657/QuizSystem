@@ -8,7 +8,7 @@ import answerService from '../../services/answerService';
 interface IProps {
     answers: IAnswer[];
     questionId: number;
-    examId: number;
+    examAttemptId: number;
     type: string;
 }
 
@@ -17,7 +17,7 @@ const Answers = (props: IProps) => {
         let data = {
             answerId,
             questionId: props.questionId,
-            examId: props.examId,
+            examAttemptId: props.examAttemptId,
         };
 
         console.log('Ready data: ', data);

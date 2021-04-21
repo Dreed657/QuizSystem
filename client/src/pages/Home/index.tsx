@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { Container, Content, Loader, Panel, Button } from 'rsuite';
@@ -7,11 +7,13 @@ import MasterHeader from '../../components/Header';
 import IShortExam from '../../models/IShortExam';
 
 import ExamService from '../../services/examService';
+import GlobalContext from '../../contexts/GlobalContext';
 
 const HomePage = () => {
     const [exams, setExams] = useState<IShortExam[]>();
 
     const history = useHistory();
+    const context = useContext(GlobalContext);
 
     useEffect(() => {
         ExamService.getAll().then((res) => {
@@ -22,7 +24,8 @@ const HomePage = () => {
     const startHanlder = (examId: string) => {
         ExamService.start(examId)
             .then((x) => {
-                console.log(x);
+                console.log(x.data);
+                context.examAttemptId = x.data.examAttemptId;
                 history.push(`/exam/${examId}`);
             })
             .then((x) => console.warn(x));

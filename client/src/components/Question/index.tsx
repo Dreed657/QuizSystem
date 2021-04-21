@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Placeholder, Panel } from 'rsuite';
 
@@ -6,10 +6,14 @@ import QuestionService from '../../services/questionService';
 import IQuestion from '../../models/IQuestion';
 import Answers from '../Answers';
 
+import GlobalContext from '../../contexts/GlobalContext';
+
 const Question = (props: { id: number | undefined; examId: number }) => {
     const { Paragraph } = Placeholder;
 
     const [question, setQuestion] = useState<IQuestion>();
+
+    const context = useContext(GlobalContext);
 
     useEffect(() => {
         setQuestion(undefined);
@@ -43,7 +47,7 @@ const Question = (props: { id: number | undefined; examId: number }) => {
             <Answers
                 answers={question.answers}
                 type={question.type}
-                examId={props.examId}
+                examAttemptId={context.examAttemptId == null ? 0 : context.examAttemptId}
                 questionId={question.id}
             />
         </Panel>

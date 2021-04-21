@@ -14,6 +14,10 @@ interface IFinish {
     endTime: Date;
 }
 
+interface IStart {
+    examAttemptId: number;
+}
+
 class ExamService {
     getAll(): Promise<AxiosResponse<any>> {
         return axiosInstance.get<IShortExam[]>(`${API_URL}/exams`);
@@ -24,11 +28,11 @@ class ExamService {
     }
 
     start(examId: string): Promise<AxiosResponse<any>> {
-        return axiosInstance.post<boolean>(`${API_URL}/exams/start?examId=${examId}`);
+        return axiosInstance.post<IStart>(`${API_URL}/exams/start?examId=${examId}`);
     }
 
     finish(examId: string): Promise<AxiosResponse<any>> {
-        return axiosInstance.post<IExam>(`${API_URL}/exams/finish?examId=${examId}`);
+        return axiosInstance.post<IFinish>(`${API_URL}/exams/finish?examId=${examId}`);
     }
 }
 

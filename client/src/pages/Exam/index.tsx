@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import {
     Container,
     Content,
@@ -9,7 +9,6 @@ import {
     Icon,
     Navbar,
     Loader,
-    Button,
 } from 'rsuite';
 
 import ExamService from '../../services/examService';
@@ -19,6 +18,8 @@ import Question from '../../components/Question';
 import Countdown from 'react-countdown';
 import timespanConverter from '../../utils/timespanConverter';
 import examService from '../../services/examService';
+
+import GlobalContext from '../../contexts/GlobalContext';
 
 interface ParamTypes {
     id: string;
@@ -32,6 +33,7 @@ const ExamPage = () => {
     const { id } = useParams<ParamTypes>();
 
     const history = useHistory();
+    const context = useContext(GlobalContext);
 
     useEffect(() => {
         ExamService.getById(id).then((res) => {
@@ -54,10 +56,11 @@ const ExamPage = () => {
         examService
             .finish(examId)
             .then((x) => {
-                console.log(x);
+                console.log(x.data);
+                context.examAttemptId = null;
                 history.push(`/`);
             })
-            .then((x) => console.warn(x));
+            .catch((x) => console.warn(x));
     };
 
     if (!exam) {
@@ -71,7 +74,9 @@ const ExamPage = () => {
                     <Navbar appearance="inverse">
                         <Navbar.Body>
                             <Nav>
-                                <Nav.Item>{exam.name}</Nav.Item>
+                                <Nav.Item>Id: {exam.id}</Nav.Item>
+                                <Nav.Item>Name: {exam.name}</Nav.Item>
+                                <Nav.Item>AttemptId: {context.examAttemptId}</Nav.Item>
                             </Nav>
                             <Nav pullRight>
                                 <Nav.Item icon={<Icon icon="clock-o" />}>

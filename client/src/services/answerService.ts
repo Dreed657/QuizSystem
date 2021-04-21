@@ -7,7 +7,7 @@ const API_URL = 'https://localhost:44369/api';
 interface ISaveAnswer {
     questionId: number;
     answerId: number;
-    examId: number;
+    examAttemptId: number;
 }
 
 class answerService {

@@ -11,24 +11,28 @@ import ProfilePage from './pages/Profile';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 
+import GlobalContext from './contexts/GlobalContext';
+
 const App = () => {
     return (
-        <Switch>
-            <Route path="/" exact component={HomePage}></Route>
-            <Route path="/Exam/:id" component={ExamPage}></Route>
-            <Route path="/Profile" exact component={ProfilePage}></Route>
-            <Route path="/Login" exact component={LoginPage}></Route>
-            <Route path="/Register" exact component={RegisterPage}></Route>
+        <GlobalContext.Provider value={{ examAttemptId: null }}>
+            <Switch>
+                <Route path="/" exact component={HomePage}></Route>
+                <Route path="/Exam/:id" component={ExamPage}></Route>
+                <Route path="/Profile" exact component={ProfilePage}></Route>
+                <Route path="/Login" exact component={LoginPage}></Route>
+                <Route path="/Register" exact component={RegisterPage}></Route>
 
-            <Route
-                path="/logout"
-                render={() => {
-                    return <Redirect to="/" />;
-                }}
-            ></Route>
+                <Route
+                    path="/logout"
+                    render={() => {
+                        return <Redirect to="/" />;
+                    }}
+                ></Route>
 
-            <Route component={ErrorPage}></Route>
-        </Switch>
+                <Route component={ErrorPage}></Route>
+            </Switch>
+        </GlobalContext.Provider>
     );
 };
 

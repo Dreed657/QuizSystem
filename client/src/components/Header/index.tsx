@@ -31,7 +31,10 @@ const MasterHeader = () => {
                         </Dropdown>
                     </Nav>
                     <Nav pullRight>
-                        <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
+                        <Dropdown title="Settings" icon={<Icon icon="cog" />}>
+                            <Dropdown.Item>Theme</Dropdown.Item>
+                            <Dropdown.Item>LogOut</Dropdown.Item>
+                        </Dropdown>
                     </Nav>
                 </Navbar.Body>
             </Navbar>
