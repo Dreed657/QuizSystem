@@ -24,7 +24,9 @@ namespace Server.Data
 
         public DbSet<ExamQuestion> ExamQuestion { get; set; }
 
-        public DbSet<UserAnswer> UserAnswer { get; set; }
+        public DbSet<AttemptQuestion> AttemptQuestions { get; set; }
+
+        public DbSet<AttemptAnswer> AttemptAnswers { get; set; }
 
         public DbSet<UserExam> ExamParticipants { get; set; }
 

@@ -174,35 +174,40 @@ namespace Server.Services.Exams
             return true;
         }
 
-        public async Task<bool> Start(string userId, int examId)
+        public async Task<StartExamModel> Start(string userId, int examId)
         {
             var exam = await this.db.Exams.FirstOrDefaultAsync(x => x.Id == examId);
 
             if (exam == null)
             {
-                return false;
+                return null;
             }
 
             var user = await this.db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             if (user == null)
             {
-                return false;
+                return null;
             }
 
-            await this.db.ExamParticipants.AddAsync(new UserExam()
+            var entity = new UserExam()
             {
                 Exam = exam,
                 User = user,
                 StartTime = DateTime.UtcNow,
                 Status = ExamStatus.Started
-            });
+            };
+
+            await this.db.ExamParticipants.AddAsync(entity);
             await this.db.SaveChangesAsync();
 
-            return true;
+            return new StartExamModel()
+            {
+                ExamAttemptId = entity.Id
+            };
         }
 
-        // TODO: LOOK UP THIS
+        // TODO: LOOK UP THIS | Refactor this to be more efficient
         public async Task<FinishExamModel> Finish(string userId, int examId)
         {
             if (examId == 0)
@@ -210,40 +215,41 @@ namespace Server.Services.Exams
                 return null;
             }
 
-            var entity = await this.db.ExamParticipants
+            var examAttempt = await this.db.ExamParticipants
                 .Where(x => x.Status == ExamStatus.Started)
-                .Include(x => x.UserAnswers)
-                .ThenInclude(x => x.Answer)
-                .Include(x => x.UserAnswers)
-                .ThenInclude(x => x.Question)
                 .FirstOrDefaultAsync(x => x.ExamId == examId && x.UserId == userId);
-            var results = entity.UserAnswers;
 
+            var results = await this.db.AttemptQuestions
+                .Where(x => x.ExamAttemptId == examAttempt.Id)
+                .SelectMany(x => x.Answers)
+                .Include(x => x.Answer)
+                .Include(x => x.AttemptQuestion)
+                .ToListAsync();
+            
+            var total = results.Count;
             var correct = results.Count(x => x.Answer.IsCorrect);
-            var wrong = results.Count - correct;
+            var wrong = total - correct;
             var score = results
                 .Where(x => x.Answer.IsCorrect)
-                .Select(x => x.Question.Difficulty)
+                .Select(x => x.AttemptQuestion.Question.Difficulty)
                 .Cast<int>()
                 .Sum();
 
-            this.db.Attach(entity);
-
-            entity.Score = score;
-            entity.CorrectAnswers = correct;
-            entity.WrongAnswers = wrong;
-            entity.EndTime = DateTime.UtcNow;
-            entity.Status = ExamStatus.Finished;
+            examAttempt.Score = score;
+            examAttempt.CorrectAnswers = correct;
+            examAttempt.WrongAnswers = wrong;
+            examAttempt.EndTime = DateTime.UtcNow;
+            examAttempt.Status = ExamStatus.Finished;
 
             await this.db.SaveChangesAsync();
 
             return new FinishExamModel()
             {
-                Score = entity.Score,
-                CorrectAnswers = entity.CorrectAnswers,
-                WrongAnswers = entity.WrongAnswers,
-                StartTime = entity.StartTime,
-                EndTime = entity.EndTime
+                Score = examAttempt.Score,
+                CorrectAnswers = examAttempt.CorrectAnswers,
+                WrongAnswers = examAttempt.WrongAnswers,
+                StartTime = examAttempt.StartTime,
+                EndTime = examAttempt.EndTime
             };
         }
     }

@@ -105,12 +105,12 @@ namespace Server.Services.Answers
             return true;
         }
 
-        // TODO: Add error responses
+        // TODO: Add error text responses | Refactor this to be more resource efficient 
         public async Task<bool> SaveAnswer(string userId, SaveAnswerInputModel model)
         {
             var examAttempt = await this.db.ExamParticipants
                 .Where(x => x.Status == ExamStatus.Started)
-                .FirstOrDefaultAsync(x => x.ExamId == model.ExamId && x.UserId == userId);
+                .FirstOrDefaultAsync(x => x.Id == model.ExamAttemptId);
 
             if (examAttempt == null)
             {
@@ -136,14 +136,46 @@ namespace Server.Services.Answers
                 return false;
             }
 
-            var entity = new UserAnswer()
-            {
-                ExamAttempt = examAttempt,
-                Question = question,
-                AnswerId = model.AnswerId
-            };
+            var attemptQuestionId = await this.db.AttemptQuestions
+                .Where(x => x.ExamAttemptId == examAttempt.Id && x.QuestionId == question.Id)
+                .Select(x => x.Id)
+                .FirstOrDefaultAsync();
 
-            await this.db.UserAnswer.AddAsync(entity);
+            // If cannot find attempt in db
+            // 0 is default value
+            if (attemptQuestionId != 0)
+            {
+                var attemptAnswers = this.db.AttemptAnswers
+                    .Where(x => x.AttemptQuestionId == attemptQuestionId);
+
+                if (attemptAnswers.All(x => x.Answer.Id != model.AnswerId))
+                {
+                    var answer = new AttemptAnswer()
+                    {
+                        AttemptQuestionId = attemptQuestionId,
+                        AnswerId = model.AnswerId
+                    };
+
+                    await this.db.AttemptAnswers.AddAsync(answer);
+                }
+            }
+            else
+            {
+                var questionAttempt = new AttemptQuestion()
+                {
+                    ExamAttempt = examAttempt,
+                    QuestionId = question.Id
+                };
+
+                var answerAttempt = new AttemptAnswer()
+                {
+                    AnswerId = model.AnswerId
+                };
+
+                questionAttempt.Answers.Add(answerAttempt);
+                await this.db.AttemptQuestions.AddAsync(questionAttempt);
+            }
+
             await this.db.SaveChangesAsync();
 
             return true;

@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Server.Data.Models
 {
-    public class UserAnswer
+    public class AttemptQuestion
     {
+        public AttemptQuestion()
+        {
+            this.Answers = new HashSet<AttemptAnswer>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -15,8 +21,6 @@ namespace Server.Data.Models
 
         public virtual Question Question { get; set; }
 
-        public int AnswerId { get; set; }
-        
-        public virtual Answer Answer { get; set; }
+        public virtual ICollection<AttemptAnswer> Answers { get; set; }
     }
 }

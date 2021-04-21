@@ -33,6 +33,7 @@ namespace Server.Data.Seeding
                     Email = "admin@gmail.com",
                 };
 
+                // TODO: HIDE ADMIN PASSWORD INTO .ENV / APP CONFIG
                 await userManager.CreateAsync(user, "password");
                 await userManager.AddToRoleAsync(user, "Administrator");
             }

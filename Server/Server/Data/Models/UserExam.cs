@@ -9,7 +9,7 @@ namespace Server.Data.Models
     {
         public UserExam()
         {
-            this.UserAnswers = new HashSet<UserAnswer>();
+            this.AttemptQuestion = new HashSet<AttemptQuestion>();
             this.Status = ExamStatus.Started;
         }
 
@@ -36,6 +36,6 @@ namespace Server.Data.Models
 
         public ExamStatus? Status { get; set; }
 
-        public virtual ICollection<UserAnswer> UserAnswers { get; set; }
+        public virtual ICollection<AttemptQuestion> AttemptQuestion { get; set; }
     }
 }
