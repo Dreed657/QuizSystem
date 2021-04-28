@@ -1,75 +1,80 @@
-<div class="exam-nav">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <h3>Exams</h3>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <div class="content p-4 w-100">
+    <div class="exam-nav">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <h3>Exams</h3>
 
-      <button
-        class="btn btn-danger d-inline-block d-lg-none ml-auto"
-        type="button"
-        data-toggle="collapse"
-        data-target="#examsNav"
-        aria-controls="examsNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fas fa-align-justify"></i>
-      </button>
+          <button
+            class="btn btn-danger d-inline-block d-lg-none ml-auto"
+            type="button"
+            data-toggle="collapse"
+            data-target="#examsNav"
+            aria-controls="examsNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-align-justify"></i>
+          </button>
 
-      <div class="collapse navbar-collapse" id="examsNav">
-        <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item">
-            <a
-              class="nav-link text-success"
-              [routerLink]="['/exams/create']"
-              title="Create"
-              ><i class="fas fa-plus-square fa-2x"></i
-            ></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
-
-<app-loader [isLoading]="isLoading"></app-loader>
-
-<table *ngIf="!isLoading" class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Questions</th>
-      <th scope="col">Duration</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let exam of exams" routerLink="{{ exam.id }}">
-      <td scope="row">{{ exam.id }}</td>
-      <td>{{ exam.name }}</td>
-      <td>{{ exam.questions }}</td>
-      <td>{{ exam.duration }}</td>
-      <td>
-        <div class="row">
-          <a
-            class="nav-link text-warning"
-            [routerLink]="['/exams/update', exam.id]"
-            title="Update"
-            ><i class="fas fa-edit fa-lg"></i
-          ></a>
-        
-          <!-- TEMP UNAVAILABLE -->
-          <!-- <a
-            class="nav-link text-danger"
-            (click)="deleteHandler(exam.id)"
-            title="Update"
-            ><i class="fas fa-trash fa-lg"></i
-          ></a> -->
+          <div class="collapse navbar-collapse" id="examsNav">
+            <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link text-success"
+                  [routerLink]="['/exams/create']"
+                  title="Create"
+                  ><i class="fas fa-plus-square fa-2x"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p *ngIf="exams?.length == 0" class="text-center text-danger">
-  No questions in the bank!
-</p>
+      </nav>
+    </div>
+
+    <app-loader [isLoading]="isLoading"></app-loader>
+
+    <table *ngIf="!isLoading" class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Questions</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams" routerLink="{{ exam.id }}">
+          <td scope="row">{{ exam.id }}</td>
+          <td>{{ exam.name }}</td>
+          <td>{{ exam.questions }}</td>
+          <td>{{ exam.duration }}</td>
+          <td>
+            <div class="row">
+              <a
+                class="nav-link text-warning"
+                [routerLink]="['/exams/update', exam.id]"
+                title="Update"
+                ><i class="fas fa-edit fa-lg"></i
+              ></a>
+
+              <!-- TEMP UNAVAILABLE -->
+              <!-- <a
+                class="nav-link text-danger"
+                (click)="deleteHandler(exam.id)"
+                title="Update"
+                ><i class="fas fa-trash fa-lg"></i
+              ></a> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="exams?.length == 0" class="text-center text-danger">
+      No questions in the bank!
+    </p>
+  </div>
+</div>

@@ -1,30 +1,37 @@
-<hr />
-<app-loader [isLoading]="isLoading"></app-loader>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <div class="content p-4 w-100">
+    <hr />
+    <app-loader [isLoading]="isLoading"></app-loader>
 
-<div *ngIf="!isLoading" class="content">
-  <h4 class="mb-0">Add questions</h4>
-  <form class="text-center border border-light p-2">
-    <div class="form-group">
-      <div class="row">
-        <div class="col-10">
-          <select
-            id="demo_overview"
-            class="form-control form-control-lg"
-            (change)="changeQuestion($event)"
-          >
-            <option
-              *ngFor="let quesiton of questions"
-              value="{{ quesiton.id }}"
-            >
-              {{ quesiton.title }}
-            </option>
-          </select>
+    <div *ngIf="!isLoading" class="content">
+      <h4 class="mb-0">Add questions</h4>
+      <form class="text-center border border-light p-2">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-10">
+              <select
+                id="demo_overview"
+                class="form-control form-control-lg"
+                (change)="changeQuestion($event)"
+              >
+                <option
+                  *ngFor="let quesiton of questions"
+                  value="{{ quesiton.id }}"
+                >
+                  {{ quesiton.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-primary" (click)="addHandler()">
+                Add
+              </button>
+            </div>
+          </div>
+          <app-loader [isLoading]="isSending"></app-loader>
         </div>
-        <div class="col-2">
-          <button class="btn btn-primary" (click)="addHandler()">Add</button>
-        </div>
-      </div>
-      <app-loader [isLoading]="isSending"></app-loader>
+      </form>
     </div>
-  </form>
+  </div>
 </div>

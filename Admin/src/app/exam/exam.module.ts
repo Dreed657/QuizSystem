@@ -8,6 +8,7 @@ import { ExamComponent } from './exam/exam.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuestionModule } from '../question/question.module';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -16,6 +17,7 @@ import { QuestionModule } from '../question/question.module';
   imports: [
     CommonModule,
     SharedModule,
+    CoreModule,
     ReactiveFormsModule,
     QuestionModule,
     ExamRouterModule

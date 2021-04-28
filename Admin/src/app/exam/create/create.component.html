@@ -1,38 +1,43 @@
-<form
-  [formGroup]="form"
-  (ngSubmit)="submitHandle()"
-  class="text-center border border-light p-5"
->
-  <p class="h4 mb-4">Create Exam</p>
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <div class="content p-4 w-100">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submitHandle()"
+      class="text-center border border-light p-5"
+    >
+      <p class="h4 mb-4">Create Exam</p>
 
-  <input
-    type="text"
-    formControlName="name"
-    class="form-control mb-4"
-    placeholder="Name"
-  />
-  <input
-    type="text"
-    formControlName="entryCode"
-    class="form-control mb-4"
-    placeholder="EntryCode"
-  />
+      <input
+        type="text"
+        formControlName="name"
+        class="form-control mb-4"
+        placeholder="Name"
+      />
+      <input
+        type="text"
+        formControlName="entryCode"
+        class="form-control mb-4"
+        placeholder="EntryCode"
+      />
 
-  <input
-    id="duration-input"
-    type="text"
-    formControlName="duration"
-    class="form-control mb-4"
-    placeholder="00:00:00.0000000"
-  />
+      <input
+        id="duration-input"
+        type="text"
+        formControlName="duration"
+        class="form-control mb-4"
+        placeholder="00:00:00.0000000"
+      />
 
-  <button
-    class="btn btn-primary"
-    color="info"
-    type="submit"
-    [disabled]="form.invalid || isSending"
-  >
-    Send
-  </button>
-  <app-loader [isLoading]="isSending"></app-loader>
-</form>
+      <button
+        class="btn btn-primary"
+        color="info"
+        type="submit"
+        [disabled]="form.invalid || isSending"
+      >
+        Send
+      </button>
+      <app-loader [isLoading]="isSending"></app-loader>
+    </form>
+  </div>
+</div>

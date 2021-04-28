@@ -6,6 +6,7 @@ import { AnswerComponent } from './answer/answer.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AnswerRouterModule } from './answer-routing.module';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -14,6 +15,7 @@ import { AnswerRouterModule } from './answer-routing.module';
   imports: [
     CommonModule,
     SharedModule,
+    CoreModule,
     ReactiveFormsModule,
     AnswerRouterModule
   ],
