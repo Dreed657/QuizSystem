@@ -1,23 +1,18 @@
-<div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <div class="content p-4 w-100">
-    <app-loader [isLoading]="isLoading"></app-loader>
+<app-loader [isLoading]="isLoading"></app-loader>
 
-    <div *ngIf="!isLoading" class="content">
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">Id: {{ answer?.id }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            QuestionId: {{ answer?.questionId }}
-          </h6>
-          <div class="card-text">
-            <p>Content: {{ answer?.content }}</p>
-            <p>IsCorrect: {{ answer?.isCorrect }}</p>
-          </div>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
+<div *ngIf="!isLoading" class="content">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">Id: {{ answer?.id }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        QuestionId: {{ answer?.questionId }}
+      </h6>
+      <div class="card-text">
+        <p>Content: {{ answer?.content }}</p>
+        <p>IsCorrect: {{ answer?.isCorrect }}</p>
       </div>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
     </div>
   </div>
 </div>

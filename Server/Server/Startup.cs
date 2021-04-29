@@ -20,7 +20,11 @@ using Server.Services.Answers;
 using Server.Services.Common;
 using Server.Services.Exams;
 using Server.Services.Identity;
+using Server.Services.NewFolder;
+using Server.Services.Profile;
 using Server.Services.Questions;
+using Server.Services.Settings;
+using Server.Services.User;
 
 namespace Server
 {
@@ -108,6 +112,9 @@ namespace Server
             services.AddTransient<IExamService, ExamService>();
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IAnswerService, AnswerService>();
+            services.AddTransient<IProfileService, ProfileService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,20 +1,32 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.Services.NewFolder;
 
 namespace Server.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class UsersController : ApiController
     {
-        public UsersController()
+        private readonly IUserService _userService;
+
+        public UsersController(IUserService userService)
         {
-            
+            _userService = userService;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return Ok("ASD");
+            var result = await this._userService.GetAll();
+
+            if (!result.Any())
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
         }
     }
 }
