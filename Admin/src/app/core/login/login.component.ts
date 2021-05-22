@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  loginError = false;
 
   constructor(
     private auth: AuthService,
@@ -25,10 +26,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   submitHandler(): void {
-    this.auth.login(this.form.value).subscribe((x) => {
-      this.auth.setToken(x.token);
-      this.router.navigate(['/']);
-      // set loading
-    });
+    this.auth.login(this.form.value).subscribe(
+      (x) => {
+        this.auth.setToken(x.token);
+        this.router.navigate(['/']);
+        // set loading
+      },
+      (error) => {
+        // set error handing
+      }
+    );
   }
 }

@@ -23,6 +23,7 @@
         formControlName="password"
       />
     </div>
+    <p *ngIf="loginError" class="text-danger text-center">Invalid credentials.</p>
     <div class="row">
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Sing In!</button>
       <a class="btn btn-primary" [routerLink]="['/register']">New here?</a>
