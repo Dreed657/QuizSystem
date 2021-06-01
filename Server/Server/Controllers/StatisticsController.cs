@@ -20,10 +20,10 @@ namespace Server.Controllers
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpGet(nameof(GetTopExams))]
@@ -33,10 +33,10 @@ namespace Server.Controllers
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
     }
 }

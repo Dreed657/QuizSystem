@@ -31,19 +31,19 @@ namespace Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return this.BadRequest(ModelState);
             }
 
             var user = await this._userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return Unauthorized(new {message = "Invalid Credentials."});
+                return this.Unauthorized(new {message = "Invalid Credentials."});
             }
 
             var passwordValid = await this._userManager.CheckPasswordAsync(user, model.Password);
             if (!passwordValid)
             {
-                return Unauthorized(new {message = "Invalid Credentials."});
+                return this.Unauthorized(new {message = "Invalid Credentials."});
             }
 
             var roles = await this._userManager.GetRolesAsync(user);
@@ -54,7 +54,7 @@ namespace Server.Controllers
                 roles,
                 this._appSettings.Secret);
 
-            return Ok(new
+            return this.Ok(new
             {
                 token,
             });
@@ -66,7 +66,7 @@ namespace Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return this.BadRequest(ModelState);
             }
 
             var user = new ApplicationUser()
@@ -80,10 +80,10 @@ namespace Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(result.Errors);
+                return this.BadRequest(result.Errors);
             }
 
-            return Ok();
+            return this.Ok();
         }
     }
 }

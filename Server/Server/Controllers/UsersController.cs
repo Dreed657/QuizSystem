@@ -23,10 +23,10 @@ namespace Server.Controllers
 
             if (!result.Any())
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
     }
 }

@@ -25,10 +25,10 @@ namespace Server.Controllers
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpGet]
@@ -38,10 +38,10 @@ namespace Server.Controllers
             
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpPost]
@@ -49,17 +49,17 @@ namespace Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return this.BadRequest(ModelState);
             }
 
             var result = await this._examService.Create(model);
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpPut]
@@ -67,17 +67,17 @@ namespace Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return this.BadRequest(ModelState);
             }
 
             var result = await this._examService.Update(model);
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpDelete("{Id}")]
@@ -87,10 +87,10 @@ namespace Server.Controllers
 
             if (!result)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         
@@ -100,17 +100,17 @@ namespace Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return this.BadRequest(ModelState);
             }
 
             var result = await this._examService.AddQuestion(model);
 
             if (!result)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpPut(nameof(RemoveQuestion))]
@@ -118,17 +118,17 @@ namespace Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return this.BadRequest(ModelState);
             }
 
             var result = await this._examService.RemoveQuestion(model);
 
             if (!result)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpPost(nameof(Start))]
@@ -139,10 +139,10 @@ namespace Server.Controllers
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
 
         [HttpPost(nameof(Finish))]
@@ -153,10 +153,10 @@ namespace Server.Controllers
 
             if (result == null)
             {
-                return BadRequest(result);
+                return this.BadRequest(result);
             }
 
-            return Ok(result);
+            return this.Ok(result);
         }
     }
 }
