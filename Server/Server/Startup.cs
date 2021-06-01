@@ -137,6 +137,7 @@ namespace Server
 
             app.UseRouting();
 
+            //TODO: Change CORS Settings for prod
             app.UseCors(options =>
                 options
                     .AllowAnyOrigin()

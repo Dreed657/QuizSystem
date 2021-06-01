@@ -29,6 +29,11 @@ namespace Server.Controllers
         [HttpPost(nameof(Login))]
         public async Task<IActionResult> Login([FromBody] LoginInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var user = await this._userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
@@ -59,6 +64,11 @@ namespace Server.Controllers
         [HttpPost(nameof(Register))]
         public async Task<IActionResult> Register([FromBody] RegisterInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var user = new ApplicationUser()
             {
                 Email = model.Email,
