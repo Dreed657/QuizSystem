@@ -33,6 +33,11 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateAnswerModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._answerService.Create(model);
 
             if (result == null)
@@ -46,6 +51,11 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateAnswerModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._answerService.Update(model);
 
             if (result == null)
@@ -72,6 +82,11 @@ namespace Server.Controllers
         [HttpPost(nameof(SaveAnswer))]
         public async Task<IActionResult> SaveAnswer(SaveAnswerInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var userId = this._user.GetId();
             var result = await this._answerService.SaveAnswer(userId, model);
 

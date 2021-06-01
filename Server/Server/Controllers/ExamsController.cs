@@ -47,6 +47,11 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateExamModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._examService.Create(model);
 
             if (result == null)
@@ -60,6 +65,11 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateExamModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._examService.Update(model);
 
             if (result == null)
@@ -88,6 +98,11 @@ namespace Server.Controllers
         [HttpPost(nameof(AddQuestion))]
         public async Task<IActionResult> AddQuestion(AddQuestionInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._examService.AddQuestion(model);
 
             if (!result)
@@ -101,6 +116,11 @@ namespace Server.Controllers
         [HttpPut(nameof(RemoveQuestion))]
         public async Task<IActionResult> RemoveQuestion(RemoveQuestionInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._examService.RemoveQuestion(model);
 
             if (!result)

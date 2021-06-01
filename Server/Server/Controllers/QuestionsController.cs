@@ -106,6 +106,11 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateQuestionModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await this._questionService.Update(model);
 
             if (result == null)
