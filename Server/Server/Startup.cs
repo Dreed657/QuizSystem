@@ -1,30 +1,14 @@
-using System;
-using System.Buffers;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Server.Data;
-using Server.Data.Models;
 using Server.Data.Seeding;
 using Server.Infrastructure.Extensions;
-using Server.Infrastructure.Helpers;
-using Server.Services.Answers;
-using Server.Services.Common;
-using Server.Services.Exams;
-using Server.Services.Identity;
-using Server.Services.NewFolder;
-using Server.Services.Profile;
-using Server.Services.Questions;
-using Server.Services.Settings;
-using Server.Services.User;
+using Server.Infrastructure.Mappings;
 
 namespace Server
 {
@@ -52,6 +36,8 @@ namespace Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(Startup).GetTypeInfo().Assembly);
+
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
