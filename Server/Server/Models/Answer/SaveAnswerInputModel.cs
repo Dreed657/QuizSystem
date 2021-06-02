@@ -1,6 +1,8 @@
-﻿namespace Server.Models.Answer
+﻿using Server.Infrastructure.Mappings.Contracts;
+
+namespace Server.Models.Answer
 {
-    public class SaveAnswerInputModel
+    public class SaveAnswerInputModel : IMapTo<Data.Models.Answer>
     {
         public int ExamAttemptId { get; set; }
 

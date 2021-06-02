@@ -36,7 +36,7 @@ namespace Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(Startup).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(Assembly.GetExecutingAssembly());
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {

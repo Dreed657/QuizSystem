@@ -1,6 +1,8 @@
-﻿namespace Server.Models.Answer
+﻿using Server.Infrastructure.Mappings.Contracts;
+
+namespace Server.Models.Answer
 {
-    public class CreateAnswerModel
+    public class CreateAnswerModel : IMapTo<Data.Models.Answer>
     {
         public string Content { get; set; }
 

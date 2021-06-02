@@ -1,6 +1,8 @@
-﻿namespace Server.Models.Answer
+﻿using Server.Infrastructure.Mappings.Contracts;
+
+namespace Server.Models.Answer
 {
-    public class AnswerViewModel
+    public class AnswerViewModel : IMapFrom<Data.Models.Answer>
     {
         public int Id { get; set; }
 

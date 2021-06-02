@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
 using Server.Data.Models.Enums;
+using Server.Infrastructure.Mappings;
 using Server.Models.Common;
 using Server.Models.Exam;
 using Server.Models.Question;
@@ -24,38 +25,17 @@ namespace Server.Services.Exams
         public async Task<IEnumerable<ShortExamModel>> GetAll()
         {
             return await this.db.Exams
-                .Select(x => new ShortExamModel()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Duration = x.Duration.ToString(),
-                    Questions = x.Questions.Count
-                })
+                .To<ShortExamModel>()
                 .ToListAsync();
         }
 
         public async Task<ExamViewModel> GetById(int id)
         {
-            var entity = await this.db.Exams
+            return await this.db.Exams
                 .Include(x => x.Questions)
                 .ThenInclude(x => x.Question.Answers)
+                .To<ExamViewModel>()
                 .FirstOrDefaultAsync(x => x.Id == id);
-
-            return new ExamViewModel()
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                EntryCode = entity.EntryCode,
-                Duration = entity.Duration.ToString(),
-                DurationInMs = entity.Duration.TotalMilliseconds.ToString(),
-                Questions = entity.Questions.Select(x => new ShortQuestionModel()
-                {
-                    Id = x.Question.Id,
-                    Title = x.Question.Title,
-                    Type = x.Question.Type.ToString(),
-                    Answers = x.Question.Answers.Count()
-                }).ToList()
-            };
         }
 
         public async Task<bool> AddQuestion(AddQuestionInputModel model)
@@ -120,10 +100,10 @@ namespace Server.Services.Exams
                 Duration = entity.Duration.ToString(),
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
-                    Id = x.Question.Id,
-                    Title = x.Question.Title,
-                    Type = x.Question.Type.ToString(),
-                    Answers = x.Question.Answers.Count(),
+                    //Id = x.Question.Id,
+                    //Title = x.Question.Title,
+                    //Type = x.Question.Type.ToString(),
+                    //Answers = x.Question.Answers.Count(),
                 }).ToList()
             };
         }
@@ -151,10 +131,10 @@ namespace Server.Services.Exams
                 Duration = entity.Duration.ToString(),
                 Questions = entity.Questions.Select(x => new ShortQuestionModel()
                 {
-                    Id = x.Question.Id,
-                    Title = x.Question.Title,
-                    Type = x.Question.Type.ToString(),
-                    Answers = x.Question.Answers.Count()
+                    //Id = x.Question.Id,
+                    //Title = x.Question.Title,
+                    //Type = x.Question.Type.ToString(),
+                    //Answers = x.Question.Answers.Count()
                 }).ToList()
             };
         }

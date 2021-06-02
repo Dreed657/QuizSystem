@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Server.Infrastructure.Mappings.Contracts;
 
 namespace Server.Models.Exam
 {
-    public class ShortExamModel
+    public class ShortExamModel : IMapFrom<Data.Models.Exam>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -14,5 +12,14 @@ namespace Server.Models.Exam
         public string Duration { get; set; }
 
         public int Questions { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Data.Models.Exam, ShortExamModel>()
+                .ForMember(
+                    x => x.Questions,
+                    opt => opt.MapFrom(y => y.Questions.Count)
+                );
+        }
     }
 }

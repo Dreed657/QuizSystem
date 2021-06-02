@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Server.Data.Models.Enums;
+﻿using AutoMapper;
+using Server.Data.Models;
+using Server.Infrastructure.Mappings.Contracts;
 
 namespace Server.Models.Question
 {
-    public class ShortQuestionModel
+    public class ShortQuestionModel : IMapFrom<Data.Models.ExamQuestion>
     {
-        public int Id { get; set; }
+        public int QuestionId { get; set; }
 
-        public string Title { get; set; }
+        public string QuestionTitle { get; set; }
 
-        public string Type { get; set; }
+        public string QuestionType { get; set; }
 
-        public string Difficulty { get; set; }
-
-        public int Answers { get; set; }
+        public int QuestionAnswersCount { get; set; }
     }
 }

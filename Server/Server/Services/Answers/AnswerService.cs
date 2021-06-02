@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
 using Server.Data.Models.Enums;
+using Server.Infrastructure.Mappings;
 using Server.Models.Answer;
 
 namespace Server.Services.Answers
@@ -20,30 +21,18 @@ namespace Server.Services.Answers
 
         public async Task<AnswerViewModel> GetById(int id)
         {
-            var entity = await this.db.Answers.FirstOrDefaultAsync(x => x.Id == id);
-
-            return new AnswerViewModel()
-            {
-                Id = entity.Id,
-                Content = entity.Content,
-                IsCorrect = entity.IsCorrect,
-                QuestionId = entity.QuestionId
-            };
+            return await this.db.Answers
+                .To<AnswerViewModel>()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<AnswerViewModel>> GetByQuestionId(int id)
         {
-            var entity = await this.db.Questions
+            return await this.db.Questions
                 .Include(x => x.Answers)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return entity?.Answers.Select(x => new AnswerViewModel()
-            {
-                Id = x.Id,
-                Content = x.Content,
-                IsCorrect = x.IsCorrect,
-                QuestionId = x.QuestionId
-            }).ToList();
+                .Where(x => x.Id == id)
+                .To<AnswerViewModel[]>()
+                .FirstOrDefaultAsync();
         }
 
         public async Task<AnswerViewModel> Create(CreateAnswerModel model)

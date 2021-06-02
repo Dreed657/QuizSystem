@@ -1,6 +1,8 @@
-﻿namespace Server.Models.Answer
+﻿using Server.Infrastructure.Mappings.Contracts;
+
+namespace Server.Models.Answer
 {
-    public class UpdateAnswerModel
+    public class UpdateAnswerModel : IMapTo<Data.Models.Answer>
     {
         public int Id { get; set; }
 

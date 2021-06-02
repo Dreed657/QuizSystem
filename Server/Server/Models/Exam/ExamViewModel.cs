@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using Server.Infrastructure.Mappings.Contracts;
 using Server.Models.Question;
 
 namespace Server.Models.Exam
 {
-    public class ExamViewModel
+    public class ExamViewModel : IMapFrom<Data.Models.Exam>
     {
         public int Id { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Server.Infrastructure.Mappings.Contracts;
 
 namespace Server.Models.Exam
 {
