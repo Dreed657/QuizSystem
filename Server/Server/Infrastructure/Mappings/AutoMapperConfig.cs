@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Server.Infrastructure.Mappings.Contracts;
@@ -14,11 +15,11 @@ namespace Server.Infrastructure.Mappings
 
         public static IMapper MapperInstance { get; set; }
 
-        public static void RegisterMappings(params Assembly[] assemblies)
+        public static MapperConfigurationExpression RegisterMappings(params Assembly[] assemblies)
         {
             if (initialized)
             {
-                return;
+                return null;
             }
 
             initialized = true;
@@ -48,7 +49,10 @@ namespace Server.Infrastructure.Mappings
                         map.CreateMappings(configuration);
                     }
                 });
+
             MapperInstance = new Mapper(new MapperConfiguration(config));
+
+            return config;
         }
 
         private static IEnumerable<TypesMap> GetFromMaps(IEnumerable<Type> types)

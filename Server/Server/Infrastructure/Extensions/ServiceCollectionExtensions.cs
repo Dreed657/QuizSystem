@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Server.Data;
 using Server.Data.Models;
 using Server.Infrastructure.Helpers;
+using Server.Infrastructure.Mappings;
 using Server.Services.Answers;
 using Server.Services.Common;
 using Server.Services.Exams;
@@ -128,7 +130,7 @@ namespace Server.Infrastructure.Extensions
                     "v1",
                     new OpenApiInfo
                     {
-                        Title = "My Gramium API",
+                        Title = "My Quizy API",
                         Version = "v1"
                     });
             });
@@ -137,6 +139,16 @@ namespace Server.Infrastructure.Extensions
         public static IServiceCollection AddApiControllers(this IServiceCollection services)
         {
             services.AddControllers();
+
+            return services;
+        }
+
+        public static IServiceCollection AddAutoMapper(this IServiceCollection services)
+        {
+            var config = AutoMapperConfig.RegisterMappings(Assembly.GetExecutingAssembly());
+
+            //services.AddAutoMapper();
+            services.AddSingleton<IMapper, Mapper>(x => new Mapper(new MapperConfiguration(config)));
 
             return services;
         }

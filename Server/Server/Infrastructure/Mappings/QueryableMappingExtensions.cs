@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
 namespace Server.Infrastructure.Mappings

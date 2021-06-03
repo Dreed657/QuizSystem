@@ -23,21 +23,19 @@ namespace Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(this.Configuration);
-
             services
+                .AddSingleton(this.Configuration)
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
                 .AddApplicationServices()
+                .AddAutoMapper()
                 .AddSwagger()
                 .AddApiControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(Assembly.GetExecutingAssembly());
-
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
