@@ -1,9 +1,10 @@
 ﻿using System;
+using Server.Data.Models;
 using Server.Infrastructure.Mappings.Contracts;
 
 namespace Server.Models.Exam
 {
-    public class FinishExamModel
+    public class FinishExamModel : IMapFrom<UserExam>
     {
         public int Score { get; set; }
 

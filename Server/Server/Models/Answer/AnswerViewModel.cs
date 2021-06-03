@@ -2,7 +2,7 @@
 
 namespace Server.Models.Answer
 {
-    public class AnswerViewModel : IMapFrom<Data.Models.Answer>
+    public class AnswerViewModel : IMapFrom<Data.Models.Answer>, IMapTo<Data.Models.Answer>
     {
         public int Id { get; set; }
 

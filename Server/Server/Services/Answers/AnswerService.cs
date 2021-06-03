@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
@@ -13,10 +14,12 @@ namespace Server.Services.Answers
     public class AnswerService : IAnswerService
     {
         private readonly ApplicationDbContext db;
+        private readonly IMapper mapper;
 
-        public AnswerService(ApplicationDbContext db)
+        public AnswerService(ApplicationDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
 
         public async Task<AnswerViewModel> GetById(int id)
@@ -47,13 +50,7 @@ namespace Server.Services.Answers
             await this.db.Answers.AddAsync(answer);
             await this.db.SaveChangesAsync();
 
-            return new AnswerViewModel()
-            {
-                Id = answer.Id,
-                Content = answer.Content,
-                IsCorrect = answer.IsCorrect,
-                QuestionId = answer.QuestionId
-            };
+            return this.mapper.Map<AnswerViewModel>(answer);
         }
 
         public async Task<AnswerViewModel> Update(UpdateAnswerModel model)
@@ -70,13 +67,7 @@ namespace Server.Services.Answers
 
             await this.db.SaveChangesAsync();
 
-            return new AnswerViewModel()
-            {
-                Id = entity.Id,
-                Content = entity.Content,
-                IsCorrect = entity.IsCorrect,
-                QuestionId = entity.QuestionId
-            };
+            return this.mapper.Map<AnswerViewModel>(entity);
         }
 
         public async Task<bool> Delete(int id)

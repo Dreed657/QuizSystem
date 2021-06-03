@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
@@ -16,10 +17,12 @@ namespace Server.Services.Exams
     public class ExamService : IExamService
     {
         private readonly ApplicationDbContext db;
+        private readonly IMapper mapper;
 
-        public ExamService(ApplicationDbContext db)
+        public ExamService(ApplicationDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
 
         public async Task<IEnumerable<ShortExamModel>> GetAll()
@@ -92,20 +95,7 @@ namespace Server.Services.Exams
             await this.db.Exams.AddAsync(entity);
             await this.db.SaveChangesAsync();
 
-            return new ExamViewModel()
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                EntryCode = entity.EntryCode,
-                Duration = entity.Duration.ToString(),
-                Questions = entity.Questions.Select(x => new ShortQuestionModel()
-                {
-                    //Id = x.Question.Id,
-                    //Title = x.Question.Title,
-                    //Type = x.Question.Type.ToString(),
-                    //Answers = x.Question.Answers.Count(),
-                }).ToList()
-            };
+            return this.mapper.Map<ExamViewModel>(entity);
         }
 
         public async Task<ExamViewModel> Update(UpdateExamModel model)
@@ -123,20 +113,7 @@ namespace Server.Services.Exams
 
             await db.SaveChangesAsync();
 
-            return new ExamViewModel()
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                EntryCode = entity.EntryCode,
-                Duration = entity.Duration.ToString(),
-                Questions = entity.Questions.Select(x => new ShortQuestionModel()
-                {
-                    //Id = x.Question.Id,
-                    //Title = x.Question.Title,
-                    //Type = x.Question.Type.ToString(),
-                    //Answers = x.Question.Answers.Count()
-                }).ToList()
-            };
+            return this.mapper.Map<ExamViewModel>(entity);
         }
 
         public async Task<bool> Delete(int examId)
@@ -223,14 +200,7 @@ namespace Server.Services.Exams
 
             await this.db.SaveChangesAsync();
 
-            return new FinishExamModel()
-            {
-                Score = examAttempt.Score,
-                CorrectAnswers = examAttempt.CorrectAnswers,
-                WrongAnswers = examAttempt.WrongAnswers,
-                StartTime = examAttempt.StartTime,
-                EndTime = examAttempt.EndTime
-            };
+            return this.mapper.Map<FinishExamModel>(examAttempt);
         }
     }
 }
