@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div class="content p-4 w-100">
+        <div class="exam-nav">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <h3>Users</h3>
+                </div>
+            </nav>
+        </div>
+
+        <app-loader [isLoading]="isLoading"></app-loader>
+
+        <table *ngIf="!isLoading" class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">ExamsAttempted</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let user of users"
+                    routerLink="/users/{{ user.id }}"
+                >
+                    <td scope="row">{{ user.id }}</td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.examsAttempted }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p *ngIf="!isLoading && users.length <= 0" class="text-center text-danger">No users in the database!</p>
+    </div>
+</div>

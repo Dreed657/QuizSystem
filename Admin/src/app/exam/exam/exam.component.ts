@@ -5,42 +5,44 @@ import { IExam } from 'src/app/shared/Models/Exams/IExam';
 import { ExamService } from '../exam.service';
 
 @Component({
-  selector: 'app-exam',
-  templateUrl: './exam.component.html',
-  styleUrls: ['./exam.component.scss'],
+    selector: 'app-exam',
+    templateUrl: './exam.component.html',
+    styleUrls: ['./exam.component.scss'],
 })
 export class ExamComponent implements OnInit {
-  exam: IExam | undefined;
-  isLoading = false;
+    exam: IExam | undefined;
+    isLoading = false;
 
-  constructor(
-    private examService: ExamService,
-    private questionService: QuestionService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    constructor(
+        private examService: ExamService,
+        private questionService: QuestionService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
-  ngOnInit(): void {
-    this.isLoading = true;
-    const id = this.route.snapshot.params.id;
+    ngOnInit(): void {
+        this.isLoading = true;
+        const id = this.route.snapshot.params.id;
 
-    this.examService.get(id).subscribe((x) => {
-      this.exam = x;
-      this.isLoading = false;
-    });
-  }
-
-  deleteHandler(id: Number | undefined): void {
-    if (id === undefined) {
-      return;
+        this.examService.get(id).subscribe((x) => {
+            this.exam = x;
+            this.isLoading = false;
+        });
     }
 
-    this.examService.delete(id).subscribe((x) => {
-      this.router.navigate(['/exams']);
-    });
-  }
+    deleteHandler(id: Number | undefined): void {
+        if (id === undefined) {
+            return;
+        }
 
-  removeQuestionHandler(id: Number): void {
-    this.questionService.removeQuestionExam({examId: this.exam?.id, questionId: id}).subscribe();
-  }
+        this.examService.delete(id).subscribe((x) => {
+            this.router.navigate(['/exams']);
+        });
+    }
+
+    removeQuestionHandler(id: Number): void {
+        this.questionService
+            .removeQuestionExam({ examId: this.exam?.id, questionId: id })
+            .subscribe();
+    }
 }

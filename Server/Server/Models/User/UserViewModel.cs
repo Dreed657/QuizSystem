@@ -5,7 +5,9 @@ namespace Server.Models.User
 {
     public class UserViewModel : IMapFrom<ApplicationUser>
     {
-        public string UserId { get; set; }
+        public string Id { get; set; }
+
+        public string UserName { get; set; }
 
         public string FirstName { get; set; }
 

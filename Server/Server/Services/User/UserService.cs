@@ -24,5 +24,12 @@ namespace Server.Services.User
                 .To<UserViewModel>()
                 .ToListAsync();
         }
+
+        public Task<UserViewModel> GetById(string id)
+        {
+            return this._db.Users
+                .To<UserViewModel>()
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

@@ -17,11 +17,24 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetAll()
         {
             var result = await this._userService.GetAll();
 
             if (!result.Any())
+            {
+                return this.BadRequest(result);
+            }
+
+            return this.Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var result = await this._userService.GetById(id);
+
+            if (result == null)
             {
                 return this.BadRequest(result);
             }

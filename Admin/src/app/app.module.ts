@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './answer/answer.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AnswerModule } from './answer/answer.module';
     CoreModule,
     SharedModule,
     ExamModule,
+    UserModule,
     QuestionModule,
     AnswerModule
   ],
