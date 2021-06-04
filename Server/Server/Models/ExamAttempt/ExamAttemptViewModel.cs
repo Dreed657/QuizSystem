@@ -1,8 +1,10 @@
 ﻿using System;
+using Server.Data.Models;
+using Server.Infrastructure.Mappings.Contracts;
 
 namespace Server.Models.ExamAttempt
 {
-    public class ExamAttemptViewModel
+    public class ExamAttemptViewModel : IMapFrom<UserExam>
     {
         public int Id { get; set; }
 

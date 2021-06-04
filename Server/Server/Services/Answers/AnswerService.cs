@@ -31,11 +31,10 @@ namespace Server.Services.Answers
 
         public async Task<IEnumerable<AnswerViewModel>> GetByQuestionId(int id)
         {
-            return await this.db.Questions
-                .Include(x => x.Answers)
-                .Where(x => x.Id == id)
-                .To<AnswerViewModel[]>()
-                .FirstOrDefaultAsync();
+            return await this.db.Answers
+                .Where(x => x.Question.Id == id)
+                .To<AnswerViewModel>()
+                .ToListAsync();
         }
 
         public async Task<AnswerViewModel> Create(CreateAnswerModel model)

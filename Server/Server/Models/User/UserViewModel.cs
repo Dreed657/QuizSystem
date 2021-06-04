@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Server.Data.Models;
+using Server.Infrastructure.Mappings.Contracts;
 
 namespace Server.Models.User
 {
-    public class UserViewModel
+    public class UserViewModel : IMapFrom<ApplicationUser>
     {
         public string UserId { get; set; }
 

@@ -62,7 +62,7 @@ namespace Server.Controllers
         [HttpGet("Exam/{ExamId}")]
         public async Task<IActionResult> GetExamQuestions(int ExamId)
         {
-            var result = await this._questionService.GetAllForExam(ExamId);
+            var result = await this._questionService.GetAllByExam(ExamId);
 
             if (result == null)
             {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Server.Services.Settings;
+using Server.Services.Statistics;
 
 namespace Server.Controllers
 {

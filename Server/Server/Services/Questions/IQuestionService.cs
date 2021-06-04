@@ -13,7 +13,7 @@ namespace Server.Services.Questions
         
         Task<IEnumerable<QuestionViewModel>> GetAllAddable(int examId);
 
-        Task<IEnumerable<QuestionViewModel>> GetAllForExam(int examId);
+        Task<IEnumerable<QuestionViewModel>> GetAllByExam(int examId);
 
         Task<QuestionViewModel> Create(CreateQuestionModel model);
 

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Server.Models.Statistics;
 
-namespace Server.Services.Settings
+namespace Server.Services.Statistics
 {
     public interface IStatisticsService
     {

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
+using Server.Infrastructure.Mappings;
 using Server.Models.Answer;
 using Server.Models.Common;
 using Server.Models.Question;
@@ -13,87 +15,45 @@ namespace Server.Services.Questions
     public class QuestionService : IQuestionService
     {
         private readonly ApplicationDbContext db;
+        private readonly IMapper mapper;
 
-        public QuestionService(ApplicationDbContext db)
+        public QuestionService(ApplicationDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
+
         public async Task<QuestionViewModel> GetById(int id)
         {
-            return await this.db.Questions.Select(x => new QuestionViewModel()
-            {
-                Id = x.Id,
-                Title = x.Title,
-                Type = x.Type.ToString(),
-                Difficulty = x.Difficulty.ToString(),
-                Answers = x.Answers.Select(a => new AnswerViewModel()
-                {
-                    Id = a.Id,
-                    Content = a.Content,
-                    IsCorrect = a.IsCorrect,
-                    QuestionId = a.QuestionId
-                }).ToList()
-            })
-            .FirstOrDefaultAsync(x => x.Id == id);
+            return await this.db.Questions
+                .To<QuestionViewModel>()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<QuestionViewModel>> GetAll()
         {
-            return await this.db.Questions.Select(x => new QuestionViewModel()
-            {
-                Id = x.Id,
-                Title = x.Title,
-                Type = x.Type.ToString(),
-                Difficulty = x.Difficulty.ToString(),
-                Answers = x.Answers.Select(a => new AnswerViewModel()
-                {
-                    Id = a.Id,
-                    Content = a.Content,
-                    QuestionId = a.QuestionId
-                }).ToList()
-            }).ToListAsync();
+            return await this.db.Questions
+                .To<QuestionViewModel>()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<QuestionViewModel>> GetAllAddable(int examId)
         {
             return await this.db.Questions
                 .Where(x => x.Exams.All(y => y.ExamId != examId))
-                .Select(x => new QuestionViewModel()
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Type = x.Type.ToString(),
-                    Difficulty = x.Difficulty.ToString(),
-                    Answers = x.Answers.Select(a => new AnswerViewModel()
-                    {
-                        Id = a.Id,
-                        Content = a.Content,
-                        QuestionId = a.QuestionId
-                    }).ToList()
-                }).ToListAsync(); ;
+                .To<QuestionViewModel>()
+                .ToListAsync();
+            ;
         }
 
         // REFACTOR 
-        public async Task<IEnumerable<QuestionViewModel>> GetAllForExam(int examId)
+        public async Task<IEnumerable<QuestionViewModel>> GetAllByExam(int examId)
         {
-            var exam = await this.db.Exams
-                .Include(x => x.Questions)
-                .FirstOrDefaultAsync(x => x.Id == examId);
-
-            return exam?.Questions.Select(x => new QuestionViewModel()
-            {
-                Id = x.Question.Id,
-                Title = x.Question.Title,
-                Type = x.Question.Type.ToString(),
-                Difficulty = x.Question.Difficulty.ToString(),
-                Answers = x.Question.Answers.Select(a => new AnswerViewModel()
-                {
-                    Id = a.Id,
-                    Content = a.Content,
-                    QuestionId = a.QuestionId
-                }).ToList()
-            })
-                .ToList();
+            return await this.db.Exams
+                .Where(x => x.Id == examId)
+                .Select(x => x.Questions)
+                .To<QuestionViewModel>()
+                .ToListAsync();
         }
 
         public async Task<QuestionViewModel> Create(CreateQuestionModel model)
@@ -108,19 +68,7 @@ namespace Server.Services.Questions
             await this.db.AddAsync(question);
             await this.db.SaveChangesAsync();
 
-            return new QuestionViewModel()
-            {
-                Id = question.Id,
-                Title = question.Title,
-                Type = question.Type.ToString(),
-                Difficulty = question.Difficulty.ToString(),
-                Answers = question.Answers.Select(a => new AnswerViewModel()
-                {
-                    Id = a.Id,
-                    Content = a.Content,
-                    QuestionId = a.QuestionId
-                }).ToList()
-            };
+            return this.mapper.Map<QuestionViewModel>(question);
         }
 
         public async Task<QuestionViewModel> Update(UpdateQuestionModel model)
@@ -138,19 +86,7 @@ namespace Server.Services.Questions
 
             await this.db.SaveChangesAsync();
 
-            return new QuestionViewModel()
-            {
-                Id = entity.Id,
-                Title = entity.Title,
-                Type = entity.Type.ToString(),
-                Difficulty = entity.Difficulty.ToString(),
-                Answers = entity.Answers.Select(a => new AnswerViewModel()
-                {
-                    Id = a.Id,
-                    Content = a.Content,
-                    QuestionId = a.QuestionId
-                }).ToList()
-            };
+            return this.mapper.Map<QuestionViewModel>(entity);
         }
 
         public async Task<bool> Delete(int id)

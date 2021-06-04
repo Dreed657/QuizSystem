@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Server.Data.Models.Enums;
+using Server.Infrastructure.Mappings.Contracts;
 using Server.Models.Answer;
 
 namespace Server.Models.Question
 {
-    public class QuestionViewModel
+    public class QuestionViewModel : IMapFrom<Data.Models.Question>
     {
         public int Id { get; set; }
 

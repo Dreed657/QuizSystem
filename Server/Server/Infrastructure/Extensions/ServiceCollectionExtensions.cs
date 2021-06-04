@@ -21,7 +21,7 @@ using Server.Services.Identity;
 using Server.Services.NewFolder;
 using Server.Services.Profile;
 using Server.Services.Questions;
-using Server.Services.Settings;
+using Server.Services.Statistics;
 using Server.Services.User;
 
 namespace Server.Infrastructure.Extensions

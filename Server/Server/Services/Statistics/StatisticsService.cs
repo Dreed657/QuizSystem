@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Models.Statistics;
 
-namespace Server.Services.Settings
+namespace Server.Services.Statistics
 {
     public class StatisticsService : IStatisticsService
     {

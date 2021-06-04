@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Infrastructure.Mappings;
 using Server.Models.ExamAttempt;
 using Server.Models.Profile;
 
@@ -20,22 +21,8 @@ namespace Server.Services.Profile
         {
             return await this._db.Users
                 .Where(x => x.Id == id)
-                .Select(x => new ProfileViewModel()
-                {
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Exams = x.Exams.Select(y => new ExamAttemptViewModel()
-                    {
-                        Id = y.Id,
-                        UserId = y.UserId,
-                        ExamName = y.Exam.Name,
-                        StartTime = y.StartTime,
-                        EndTime = y.EndTime,
-                        Score = y.Score,
-                        CorrectAnswers = y.CorrectAnswers,
-                        WrongAnswers = y.WrongAnswers
-                    }).ToList()
-                }).FirstOrDefaultAsync();
+                .To<ProfileViewModel>()
+                .FirstOrDefaultAsync();
         }
     }
 }
