@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Data.Models;
+using Server.Data.Models.Enums;
 using Server.Infrastructure.Mappings;
 using Server.Models.Answer;
 using Server.Models.Common;
@@ -46,7 +47,6 @@ namespace Server.Services.Questions
             ;
         }
 
-        // REFACTOR 
         public async Task<IEnumerable<QuestionViewModel>> GetAllByExam(int examId)
         {
             return await this.db.Exams
@@ -58,6 +58,11 @@ namespace Server.Services.Questions
 
         public async Task<QuestionViewModel> Create(CreateQuestionModel model)
         {
+            if (model.Difficulty == 0)
+            {
+                model.Difficulty = QuestionDifficulty.Easy;
+            }
+
             var question = new Question()
             {
                 Title = model.Title,

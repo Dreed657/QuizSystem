@@ -181,6 +181,7 @@ namespace Server.Services.Exams
                 .SelectMany(x => x.Answers)
                 .Include(x => x.Answer)
                 .Include(x => x.AttemptQuestion)
+                .ThenInclude(x => x.Question)
                 .ToListAsync();
             
             var total = results.Count;
