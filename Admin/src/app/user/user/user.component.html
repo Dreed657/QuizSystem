@@ -1,26 +1,28 @@
 <div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <div class="content p-4 w-100">
-    <app-loader [isLoading]="isLoading"></app-loader>
+    <app-sidebar></app-sidebar>
+    <div class="content p-4 w-100">
+        <app-loader [isLoading]="isLoading"></app-loader>
 
-    <div *ngIf="!isLoading" class="content">
-      <div class="exam-nav">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <h3>User</h3>
-            <dl class="dl-horizontal">
-              <dt>Id</dt>
-              <dd>{{user?.id}}</dd>
-              <dt>First Name</dt>
-              <dd>{{user?.firstName}}</dd>
-              <dt>Last Name</dt>
-              <dd>{{user?.lastName}}</dd>
-              <dt>ExamAttemepts</dt>
-              <dd>{{user?.examsAttempted}}</dd>
-            </dl>
-          </div>
-        </nav>
-      </div>
+        <div *ngIf="!isLoading" class="content">
+            <div class="exam-nav">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <h3>User</h3>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <dl class="dl-horizontal m-2">
+                    <dt>Id</dt>
+                    <dd>{{ user?.id }}</dd>
+                    <dt>First Name</dt>
+                    <dd>{{ user?.firstName }}</dd>
+                    <dt>Last Name</dt>
+                    <dd>{{ user?.lastName }}</dd>
+                    <dt>ExamAttemepts</dt>
+                    <dd>{{ user?.examsAttempted }}</dd>
+                </dl>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
