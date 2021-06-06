@@ -1,35 +1,35 @@
 <hr />
 <div class="content w-25">
-  <h4 class="mb-0">Add Answers</h4>
-  <form *ngIf="questionId !== undefined" [formGroup]="form" class="p-3 m-2">
-    <div class="form-group">
-      <input
-        type="text"
-        formControlName="content"
-        placeholder="Answer"
-        class="form-control"
-      />
-    </div>
+    <h4 class="mb-0">Add Answers</h4>
+    <form *ngIf="questionId !== undefined" [formGroup]="form" class="p-3 m-2">
+        <div class="form-group">
+            <input
+                type="text"
+                formControlName="content"
+                placeholder="Answer"
+                class="form-control"
+            />
+        </div>
 
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="isCorrect"
-        formControlName="isCorrect"
-      />
-      <label class="form-check-label" for="isCorrect"> Correct? </label>
-    </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="isCorrect"
+                formControlName="isCorrect"
+            />
+            <label class="form-check-label" for="isCorrect"> Correct? </label>
+        </div>
 
-    <button
-      class="btn btn-primary my-2"
-      color="info"
-      type="submit"
-      (click)="addHandler()"
-      [disabled]="form.invalid || isSending"
-    >
-      Add
-    </button>
-    <app-loader [isLoading]="isSending"></app-loader>
-  </form>
+        <button
+            class="btn btn-primary my-2"
+            color="info"
+            type="submit"
+            (click)="addHandler()"
+            [disabled]="form.invalid || isSending"
+        >
+            Add
+        </button>
+        <app-loader [isLoading]="isSending"></app-loader>
+    </form>
 </div>

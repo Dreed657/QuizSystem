@@ -1,119 +1,194 @@
 <div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <div class="content p-4 w-100">
-    <app-loader [isLoading]="isLoading"></app-loader>
-    <div *ngIf="!isLoading" class="row">
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2 bg-secondary">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
+    <app-sidebar></app-sidebar>
+    <div class="content p-4 w-100">
+        <app-loader [isLoading]="isLoading"></app-loader>
+        <div *ngIf="!isLoading" class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
                 <div
-                  class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                    class="
+                        card
+                        border-left-success
+                        shadow
+                        h-100
+                        py-2
+                        bg-secondary
+                    "
                 >
-                  Exams Count
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div
+                                    class="
+                                        text-xs
+                                        font-weight-bold
+                                        text-info text-uppercase
+                                        mb-1
+                                    "
+                                >
+                                    Exams Count
+                                </div>
+                                <div
+                                    class="
+                                        h5
+                                        mb-0
+                                        font-weight-bold
+                                        text-gray-800
+                                    "
+                                >
+                                    {{ data?.examsCount }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="far fa-copy"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  {{ data?.examsCount }}
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="far fa-copy"></i>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2 bg-secondary">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
+            <div class="col-xl-3 col-md-6 mb-4">
                 <div
-                  class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                    class="
+                        card
+                        border-left-primary
+                        shadow
+                        h-100
+                        py-2
+                        bg-secondary
+                    "
                 >
-                  Questions Count
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div
+                                    class="
+                                        text-xs
+                                        font-weight-bold
+                                        text-info text-uppercase
+                                        mb-1
+                                    "
+                                >
+                                    Questions Count
+                                </div>
+                                <div
+                                    class="
+                                        h5
+                                        mb-0
+                                        font-weight-bold
+                                        text-gray-800
+                                    "
+                                >
+                                    {{ data?.questionsCount }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  {{ data?.questionsCount }}
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-users"></i>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2 bg-info">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2 bg-info">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div
+                                    class="
+                                        text-xs
+                                        font-weight-bold
+                                        text-warning text-uppercase
+                                        mb-1
+                                    "
+                                >
+                                    Exam Attempts Count
+                                </div>
+                                <div
+                                    class="
+                                        h5
+                                        mb-0
+                                        font-weight-bold
+                                        text-gray-800
+                                    "
+                                >
+                                    {{ data?.examAttemptsCount }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fab fa-angrycreative"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
                 <div
-                  class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                    class="
+                        card
+                        border-left-warning
+                        shadow
+                        h-100
+                        py-2
+                        bg-warning
+                    "
                 >
-                  Exam Attempts Count
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div
+                                    class="
+                                        text-xs
+                                        font-weight-bold
+                                        text-success text-uppercase
+                                        mb-1
+                                    "
+                                >
+                                    User Count
+                                </div>
+                                <div
+                                    class="
+                                        h5
+                                        mb-0
+                                        font-weight-bold
+                                        text-gray-800
+                                    "
+                                >
+                                    {{ data?.usersCount }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  {{ data?.examAttemptsCount }}
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="fab fa-angrycreative"></i>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2 bg-warning">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div
-                  class="text-xs font-weight-bold text-success text-uppercase mb-1"
-                >
-                  User Count
-                </div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  {{ data?.usersCount }}
-                </div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-users"></i>
-              </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Attendees</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of topExams">
+                            <th>{{ item.id }}</th>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.attemptsCount }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-          </div>
+            <div class="col bg-secondary">
+                <h1>Most active users will go here</h1>
+                <h1>2</h1>
+                <h1>3</h1>
+                <h1>4</h1>
+                <h1>5</h1>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Attendees</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of topExams">
-              <th>{{ item.id }}</th>
-              <td>{{ item.name }}</td>
-              <td>{{ item.attemptsCount }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col bg-secondary">
-        <h1>Most active users will go here</h1>
-        <h1>2</h1>
-        <h1>3</h1>
-        <h1>4</h1>
-        <h1>5</h1>
-      </div>
-    </div>
-  </div>
 </div>

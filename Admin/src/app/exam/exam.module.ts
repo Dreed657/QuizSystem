@@ -10,17 +10,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { QuestionModule } from '../question/question.module';
 import { CoreModule } from '../core/core.module';
 
-
-
 @NgModule({
-  declarations: [ListingComponent, CreateComponent, UpdateComponent, ExamComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CoreModule,
-    ReactiveFormsModule,
-    QuestionModule,
-    ExamRouterModule
-  ]
+    declarations: [
+        ListingComponent,
+        CreateComponent,
+        UpdateComponent,
+        ExamComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        CoreModule,
+        ReactiveFormsModule,
+        QuestionModule,
+        ExamRouterModule,
+    ],
 })
-export class ExamModule { }
+export class ExamModule {}

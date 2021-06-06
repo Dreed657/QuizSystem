@@ -7,18 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [SidebarComponent, LoginComponent, RegisterComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
-  providers: [
-    appInterceptorProvider
-  ],
-  exports: [SidebarComponent, LoginComponent, RegisterComponent]
+    declarations: [SidebarComponent, LoginComponent, RegisterComponent],
+    imports: [CommonModule, RouterModule, ReactiveFormsModule],
+    providers: [appInterceptorProvider],
+    exports: [SidebarComponent, LoginComponent, RegisterComponent],
 })
-export class CoreModule { }
+export class CoreModule {}

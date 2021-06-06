@@ -6,23 +6,23 @@ import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './shared/error/error.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  // {
-  //   path: 'register',
-  //   component: RegisterComponent
-  // },
-  {
-    path: '**',
-    component: ErrorComponent,
-  },
+    {
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+    },
+    // {
+    //   path: 'register',
+    //   component: RegisterComponent
+    // },
+    {
+        path: '**',
+        component: ErrorComponent,
+    },
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

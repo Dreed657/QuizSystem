@@ -1,5 +1,5 @@
 export default interface ITopExams {
     id: string;
-    name: string,
+    name: string;
     attemptsCount: number;
 }

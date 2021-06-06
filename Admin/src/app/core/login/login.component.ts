@@ -4,37 +4,37 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
-  loginError = false;
+    form: FormGroup;
+    loginError = false;
 
-  constructor(
-    private auth: AuthService,
-    private fb: FormBuilder,
-    private router: Router
-  ) {
-    this.form = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
-  }
+    constructor(
+        private auth: AuthService,
+        private fb: FormBuilder,
+        private router: Router
+    ) {
+        this.form = this.fb.group({
+            email: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+        });
+    }
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 
-  submitHandler(): void {
-    this.auth.login(this.form.value).subscribe(
-      (x) => {
-        this.auth.setToken(x.token);
-        this.router.navigate(['/']);
-        // set loading
-      },
-      (error) => {
-        // set error handing
-      }
-    );
-  }
+    submitHandler(): void {
+        this.auth.login(this.form.value).subscribe(
+            (x) => {
+                this.auth.setToken(x.token);
+                this.router.navigate(['/']);
+                // set loading
+            },
+            (error) => {
+                // set error handing
+            }
+        );
+    }
 }

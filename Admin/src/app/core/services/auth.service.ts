@@ -7,29 +7,28 @@ import IRegister from 'src/app/shared/Models/Common/IRegister';
 const tokenStorageName = 'auth-token';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class AuthService {
+    constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+    login(data: ILogin): Observable<any> {
+        return this.http.post('/identity/login', data);
+    }
 
-  login(data: ILogin): Observable<any> {
-    return this.http.post('/identity/login', data);
-  }
+    register(data: IRegister): Observable<any> {
+        return this.http.post('/identity/register', data);
+    }
 
-  register(data: IRegister): Observable<any> {
-    return this.http.post('/identity/register', data);
-  }
+    setToken(token: string): void {
+        localStorage.setItem(tokenStorageName, token);
+    }
 
-  setToken(token: string): void {
-    localStorage.setItem(tokenStorageName, token);
-  }
+    getToken(): string | null {
+        return localStorage.getItem(tokenStorageName);
+    }
 
-  getToken(): string | null {
-    return localStorage.getItem(tokenStorageName);
-  }
-
-  removeToken(): void {
-    localStorage.removeItem(tokenStorageName);
-  }
+    removeToken(): void {
+        localStorage.removeItem(tokenStorageName);
+    }
 }

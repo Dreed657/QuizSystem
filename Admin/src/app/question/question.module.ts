@@ -11,18 +11,22 @@ import { AddexamComponent } from './addexam/addexam.component';
 import { AnswerModule } from '../answer/answer.module';
 import { CoreModule } from '../core/core.module';
 
-
-
 @NgModule({
-  declarations: [CreateComponent, UpdateComponent, ListingComponent, QuestionComponent, AddexamComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    AnswerModule,
-    CoreModule,
-    ReactiveFormsModule,
-    QuestionRouterModule
-  ],
-  exports: [AddexamComponent]
+    declarations: [
+        CreateComponent,
+        UpdateComponent,
+        ListingComponent,
+        QuestionComponent,
+        AddexamComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        AnswerModule,
+        CoreModule,
+        ReactiveFormsModule,
+        QuestionRouterModule,
+    ],
+    exports: [AddexamComponent],
 })
-export class QuestionModule { }
+export class QuestionModule {}

@@ -13,22 +13,19 @@ import { AnswerModule } from './answer/answer.module';
 import { UserModule } from './user/user.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    CoreModule,
-    SharedModule,
-    ExamModule,
-    UserModule,
-    QuestionModule,
-    AnswerModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, HomeComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        CoreModule,
+        SharedModule,
+        ExamModule,
+        UserModule,
+        QuestionModule,
+        AnswerModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

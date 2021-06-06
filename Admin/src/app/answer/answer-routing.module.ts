@@ -1,7 +1,6 @@
-import { Routes, RouterModule } from "@angular/router";
-import { AnswerComponent } from "./answer/answer.component";
-import { UpdateComponent } from "./update/update.component";
-
+import { Routes, RouterModule } from '@angular/router';
+import { AnswerComponent } from './answer/answer.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
     {
@@ -9,14 +8,14 @@ const routes: Routes = [
         children: [
             {
                 path: 'update/:id',
-                component: UpdateComponent
+                component: UpdateComponent,
             },
             {
                 path: ':id',
-                component: AnswerComponent
-            }
-        ]
-    }
+                component: AnswerComponent,
+            },
+        ],
+    },
 ];
 
 export const AnswerRouterModule = RouterModule.forChild(routes);

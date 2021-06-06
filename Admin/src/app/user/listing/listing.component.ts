@@ -14,11 +14,11 @@ export class ListingComponent implements OnInit {
     constructor(private userService: UserService) {}
 
     ngOnInit(): void {
-      this.isLoading = true;
+        this.isLoading = true;
 
-      this.userService.getAll().subscribe(x => {
-        this.users = x;
-        this.isLoading = false;
-      })
+        this.userService.getAll().subscribe((x) => {
+            this.users = x;
+            this.isLoading = false;
+        });
     }
 }

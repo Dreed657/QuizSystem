@@ -1,32 +1,32 @@
 <nav *ngIf="!hidden" id="sidebar">
-  <div class="sidebar-header">
-    <h3>Bootstrap Sidebar</h3>
-  </div>
+    <div class="sidebar-header">
+        <h3>Bootstrap Sidebar</h3>
+    </div>
 
-  <ul class="list-unstyled components">
-    <p>Dummy Heading</p>
-    <li
-      [routerLinkActive]="['active']"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      <a [routerLink]="['/']">Home</a>
-    </li>
-    <li [routerLinkActive]="['active']">
-      <a [routerLink]="['/exams']">Exams</a>
-    </li>
-    <li [routerLinkActive]="['active']">
-      <a [routerLink]="['/questions']">Questions bank</a>
-    </li>
-    <li [routerLinkActive]="['active']">
-      <a [routerLink]="['/users']">Users</a>
-    </li>
-    <li (click)="logoutHandler()">
-      <a>LogOut!</a>
-    </li>
-  </ul>
+    <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+        >
+            <a [routerLink]="['/']">Home</a>
+        </li>
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/exams']">Exams</a>
+        </li>
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/questions']">Questions bank</a>
+        </li>
+        <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/users']">Users</a>
+        </li>
+        <li (click)="logoutHandler()">
+            <a>LogOut!</a>
+        </li>
+    </ul>
 
-  <ul class="list-unstyled CTAs text-center">
-    <li>Quizy</li>
-    <li class="mt-2">All rights reserved</li>
-  </ul>
+    <ul class="list-unstyled CTAs text-center">
+        <li>Quizy</li>
+        <li class="mt-2">All rights reserved</li>
+    </ul>
 </nav>

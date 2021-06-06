@@ -1,55 +1,55 @@
 <div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <div class="content p-4 w-100">
-    <app-loader [isLoading]="isLoading"></app-loader>
+    <app-sidebar></app-sidebar>
+    <div class="content p-4 w-100">
+        <app-loader [isLoading]="isLoading"></app-loader>
 
-    <form
-      *ngIf="!isLoading"
-      [formGroup]="form"
-      (ngSubmit)="submitHandle()"
-      class="text-center border border-light p-5"
-    >
-      <p class="h4 mb-4">Update Exam {{ exam?.name }}</p>
-
-      <input
-        type="text"
-        formControlName="name"
-        class="form-control mb-4"
-        placeholder="Name"
-      />
-      <input
-        type="text"
-        formControlName="entryCode"
-        class="form-control mb-4"
-        placeholder="EntryCode"
-      />
-
-      <input
-        id="duration-input"
-        type="text"
-        formControlName="duration"
-        class="form-control mb-4"
-        placeholder="00:00:00.0000000"
-      />
-
-      <input
-        type="text"
-        formControlName="id"
-        class="form-control mb-4"
-        hidden
-      />
-
-      <div>
-        <button
-          class="btn btn-success"
-          color="info"
-          type="submit"
-          [disabled]="form.invalid"
+        <form
+            *ngIf="!isLoading"
+            [formGroup]="form"
+            (ngSubmit)="submitHandle()"
+            class="text-center border border-light p-5"
         >
-          Send
-        </button>
-        <app-loader [isLoading]="isSending"></app-loader>
-      </div>
-    </form>
-  </div>
+            <p class="h4 mb-4">Update Exam {{ exam?.name }}</p>
+
+            <input
+                type="text"
+                formControlName="name"
+                class="form-control mb-4"
+                placeholder="Name"
+            />
+            <input
+                type="text"
+                formControlName="entryCode"
+                class="form-control mb-4"
+                placeholder="EntryCode"
+            />
+
+            <input
+                id="duration-input"
+                type="text"
+                formControlName="duration"
+                class="form-control mb-4"
+                placeholder="00:00:00.0000000"
+            />
+
+            <input
+                type="text"
+                formControlName="id"
+                class="form-control mb-4"
+                hidden
+            />
+
+            <div>
+                <button
+                    class="btn btn-success"
+                    color="info"
+                    type="submit"
+                    [disabled]="form.invalid"
+                >
+                    Send
+                </button>
+                <app-loader [isLoading]="isSending"></app-loader>
+            </div>
+        </form>
+    </div>
 </div>

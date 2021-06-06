@@ -1,4 +1,4 @@
 export interface IQuestionExam {
-    questionId: Number | undefined,
-    examId: Number | undefined
+    questionId: Number | undefined;
+    examId: Number | undefined;
 }

@@ -8,17 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AnswerRouterModule } from './answer-routing.module';
 import { CoreModule } from '../core/core.module';
 
-
-
 @NgModule({
-  declarations: [CreateComponent, UpdateComponent, AnswerComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    CoreModule,
-    ReactiveFormsModule,
-    AnswerRouterModule
-  ],
-  exports: [CreateComponent]
+    declarations: [CreateComponent, UpdateComponent, AnswerComponent],
+    imports: [
+        CommonModule,
+        SharedModule,
+        CoreModule,
+        ReactiveFormsModule,
+        AnswerRouterModule,
+    ],
+    exports: [CreateComponent],
 })
-export class AnswerModule { }
+export class AnswerModule {}
