@@ -52,6 +52,12 @@ const MasterHeader = () => {
                         </Nav>
                     )}
                     <Nav pullRight>
+                        <Nav.Item
+                            icon={<Icon icon="user"></Icon>}
+                            onSelect={() => history.push('/profile')}
+                        >
+                            Profile
+                        </Nav.Item>
                         <Dropdown title="Settings" icon={<Icon icon="cog" />}>
                             <Dropdown.Item>Theme</Dropdown.Item>
                             <Dropdown.Item onSelect={logoutHandler}>

@@ -10,6 +10,10 @@ namespace Server.Models.Profile
 {
     public class ProfileViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
     {
+        public string Email { get; set; }
+
+        public string UserName { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -24,7 +28,7 @@ namespace Server.Models.Profile
                 .ForMember(
                     x => x.AvgGPA,
                     opt => opt.MapFrom(
-                        y => Math.Round(y.Exams.Average(a => a.Score), 2)
+                        y => y.Exams.Any() ? y.Exams.Average(a => a.Score) : 0
                     )
                 );
         }
