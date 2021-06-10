@@ -9,6 +9,7 @@ namespace Server.Data.Models
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Exams = new HashSet<UserExam>();
         }
 
         public string FirstName { get; set; }
